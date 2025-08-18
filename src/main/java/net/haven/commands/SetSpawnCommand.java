@@ -39,6 +39,8 @@ public class SetSpawnCommand implements CommandExecutor {
         plugin.getConfig().set("spawn.yaw", location.getYaw());
         plugin.getConfig().set("spawn.pitch", location.getPitch());
 
+        plugin.saveConfig();
+
         player.sendMessage(ChatColor.GREEN + "SpawnPoint has been successfully created!");
         return true;
     }

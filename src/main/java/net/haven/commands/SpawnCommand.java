@@ -25,7 +25,7 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        Player player = null;
+        Player player = (Player) sender;
 
         if (!player.hasPermission("haven.command.spawn")) {
             player.sendMessage(ChatColor.RED + "You don't have permissions!");

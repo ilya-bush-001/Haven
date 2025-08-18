@@ -38,7 +38,7 @@ public class DeleteSpawnCommand implements CommandExecutor {
         plugin.getConfig().set("spawn", null);
         plugin.saveConfig();
 
-        player.sendMessage(ChatColor.GREEN + "SpawnPoint has been succesfully" + ChatColor.RED + "deleted" + ChatColor.GREEN + "!");
+        player.sendMessage(ChatColor.GREEN + "SpawnPoint has been succesfully" + ChatColor.RED + " deleted" + ChatColor.GREEN + "!");
         return true;
     }
 

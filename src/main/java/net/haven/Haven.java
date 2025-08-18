@@ -20,7 +20,7 @@ public final class Haven extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("delspawn")).setExecutor(new DeleteSpawnCommand(this));
         Objects.requireNonNull(this.getCommand("hvreload")).setExecutor(new ReloadCommand(this));
 
-        saveDefaultConfig();
+        saveConfig();
     }
 
     @Override
