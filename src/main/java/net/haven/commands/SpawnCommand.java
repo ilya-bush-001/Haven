@@ -32,8 +32,6 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        player = (Player) sender;
-
         String worldName = plugin.getConfig().getString("spawn.world");
         if (worldName == null) {
             player.sendMessage(ChatColor.RED + "SpawnPoint has not been set yet!");
