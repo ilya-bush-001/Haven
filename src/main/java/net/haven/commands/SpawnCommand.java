@@ -35,7 +35,7 @@ public class SpawnCommand implements CommandExecutor {
 
         String worldName = plugin.getConfig().getString("spawn.world");
         if (worldName == null) {
-            player.sendMessage("SpawnPoint has not been installed yet!");
+            player.sendMessage("SpawnPoint has not been set yet!");
             return true;
         }
 
