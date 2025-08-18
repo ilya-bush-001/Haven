@@ -1,0 +1,7 @@
+name: Haven
+version: '${version}'
+main: net.haven.Haven
+api-version: '1.16'
+authors: [Ilya Bush]
+description: A flexible plugin for setting the spawnpoint!
+website: https://www.youtube.com/@IlyaBush-001
