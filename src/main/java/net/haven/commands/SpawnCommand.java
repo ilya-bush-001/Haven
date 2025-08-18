@@ -1,5 +1,6 @@
 package net.haven.commands;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -20,14 +21,14 @@ public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("This command only for players!");
+            sender.sendMessage(ChatColor.RED + "This command only for players!");
             return true;
         }
 
         Player player = null;
 
         if (!player.hasPermission("haven.command.spawn")) {
-            player.sendMessage("You don't have permissions!");
+            player.sendMessage(ChatColor.RED + "You don't have permissions!");
             return true;
         }
 
@@ -35,7 +36,7 @@ public class SpawnCommand implements CommandExecutor {
 
         String worldName = plugin.getConfig().getString("spawn.world");
         if (worldName == null) {
-            player.sendMessage("SpawnPoint has not been set yet!");
+            player.sendMessage(ChatColor.RED + "SpawnPoint has not been set yet!");
             return true;
         }
 
@@ -49,7 +50,7 @@ public class SpawnCommand implements CommandExecutor {
         );
 
         player.teleport(spawnLocation);
-        player.sendMessage("Teleported to spawn!");
+        player.sendMessage(ChatColor.GREEN + "Teleported to spawn!");
         return true;
     }
 }
