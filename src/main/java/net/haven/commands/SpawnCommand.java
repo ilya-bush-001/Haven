@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.haven.Haven;
+import org.jetbrains.annotations.NotNull;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -17,13 +18,20 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("This command only for players!");
             return true;
         }
 
-        Player player = (Player) sender;
+        Player player = null;
+
+        if (!player.hasPermission("haven.command.spawn")) {
+            player.sendMessage("You don't have permissions!");
+            return true;
+        }
+
+        player = (Player) sender;
 
         String worldName = plugin.getConfig().getString("spawn.world");
         if (worldName == null) {
