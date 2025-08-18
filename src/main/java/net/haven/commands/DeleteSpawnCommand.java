@@ -1,5 +1,6 @@
 package net.haven.commands;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,26 +19,26 @@ public class DeleteSpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("This command is only for players!");
+            sender.sendMessage(ChatColor.RED + "This command is only for players!");
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("haven.command.deletespawn")) {
-            player.sendMessage("You don't have permissions!");
+            player.sendMessage(ChatColor.RED + "You don't have permissions!");
             return true;
         }
 
         if (!plugin.getConfig().contains("spawn.world")) {
-            player.sendMessage("SpawnPoint has not been set yet!");
+            player.sendMessage(ChatColor.RED + "SpawnPoint has not been set yet!");
             return true;
         }
 
         plugin.getConfig().set("spawn", null);
         plugin.saveConfig();
 
-        player.sendMessage("SpawnPoint has been succesfully deleted!");
+        player.sendMessage(ChatColor.GREEN + "SpawnPoint has been succesfully" + ChatColor.RED + "deleted" + ChatColor.GREEN + "!");
         return true;
     }
 
