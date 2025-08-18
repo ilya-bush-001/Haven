@@ -1,8 +1,10 @@
 package net.haven;
 
 import net.haven.commands.DeleteSpawnCommand;
+import net.haven.commands.ReloadCommand;
 import net.haven.commands.SetSpawnCommand;
 import net.haven.commands.SpawnCommand;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -16,6 +18,7 @@ public final class Haven extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
         Objects.requireNonNull(this.getCommand("delspawn")).setExecutor(new DeleteSpawnCommand(this));
+        Objects.requireNonNull(this.getCommand("hvreload")).setExecutor(new ReloadCommand(this));
 
         saveDefaultConfig();
     }

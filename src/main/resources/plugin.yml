@@ -18,3 +18,4 @@ commands:
     description: Delete SpawnPoint
     usage: /delspawn
     permission: haven.command.deletespawn
+  h
