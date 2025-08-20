@@ -19,26 +19,26 @@ public class DeleteSpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "This command is only for players!");
+            sender.sendMessage(plugin.getMessage("messages.error", "&cYou must be a player to use this command!"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("haven.command.deletespawn")) {
-            player.sendMessage(ChatColor.RED + "You don't have permissions!");
+            sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
             return true;
         }
 
         if (!plugin.getConfig().contains("spawn.world")) {
-            player.sendMessage(ChatColor.RED + "SpawnPoint has not been set yet!");
+            sender.sendMessage(plugin.getMessage("messages.setspawn.success", "&aSpawn point successfully set!"));
             return true;
         }
 
         plugin.getConfig().set("spawn", null);
         plugin.saveConfig();
 
-        player.sendMessage(ChatColor.GREEN + "SpawnPoint has been succesfully" + ChatColor.RED + " deleted" + ChatColor.GREEN + "!");
+        sender.sendMessage(plugin.getMessage("messages.delspawn.success", "&aSpawn point deleted!"));
         return true;
     }
 
