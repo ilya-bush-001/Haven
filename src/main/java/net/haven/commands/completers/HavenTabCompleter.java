@@ -46,6 +46,25 @@ public class HavenTabCompleter implements TabCompleter {
 
         switch (subCommand) {
             case "setspawn":
+                return handleSetSpawnArgs(sender, args);
+            case "delspawn":
+                return handleDelSpawnArgs(sender, args);
+            case "reload":
+                return handleReloadArgs(sender, args);
+            case "spawn":
+                return handleSpawnArgs(sender, args);
+            case "help":
+                return handleHelpArgs(sender, args);
+            default:
+                return new ArrayList<>();
+        }
+    }
+
+    private boolean hasAccessToSubcommand(CommandSender sender, String subCommand) {
+        boolean hasFullAccess = sender.hasPermission("haven.*");
+
+        switch (subCommand) {
+            case "setspawn":
                 return hasAccessToCommand(sender, args);
             case "delspawn":
                 return hasAccessToCommand(sender, args);
@@ -55,8 +74,6 @@ public class HavenTabCompleter implements TabCompleter {
                 return hasAccessToCommand(sender, args);
             case "help":
                 return hasAccessToCommand(sender, args);
-            default:
-                return new ArrayList<>();
         }
     }
 }
