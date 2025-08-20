@@ -18,7 +18,7 @@ public class ReloadCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!sender.hasPermission("haven.command.reload")) {
-            sender.sendMessage(ChatColor.RED + "You don't have permissions!");
+            sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
             return true;
         }
 
@@ -26,6 +26,7 @@ public class ReloadCommand implements CommandExecutor {
             plugin.reloadConfig();
             plugin.reloadMessagesConfig();
             sender.sendMessage(ChatColor.GREEN + "You have successfully reloaded the plugin!");
+            sender.sendMessage(plugin.getMessage("messages.reload.success", "&aConfiguration reloaded!"));
             return true;
         } catch (Exception e) {
             sender.sendMessage(ChatColor.RED + "An error occurred while reloading the configuration!");
