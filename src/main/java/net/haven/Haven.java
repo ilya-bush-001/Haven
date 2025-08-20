@@ -31,10 +31,4 @@ public final class Haven extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Haven disabled!");
     }
-
-    public void loadSpawnLocation() {
-        if (getConfig().contains("spawn.location")) {
-            spawnLocation = (Location) getConfig().get("spawn.location");
-        }
-    }
 }
