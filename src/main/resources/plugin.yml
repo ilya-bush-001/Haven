@@ -9,7 +9,7 @@ commands:
   hv:
     description: Set SpawnPoint
     usage: /hv <subcommand>
-    permission: haven.use
+    permission: haven.*
   spawn:
     description: Teleport to spawn
     usage: /spawn
