@@ -4,7 +4,6 @@ import net.haven.commands.DeleteSpawnCommand;
 import net.haven.commands.ReloadCommand;
 import net.haven.commands.SetSpawnCommand;
 import net.haven.commands.SpawnCommand;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;

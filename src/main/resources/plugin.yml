@@ -6,19 +6,7 @@ authors: [Ilya Bush]
 description: A flexible plugin for setting the spawnpoint!
 website: https://www.youtube.com/@IlyaBush-001
 commands:
-  setspawn:
+  hv:
     description: Set SpawnPoint
-    usage: /setspawn
-    permission: haven.command.setspawn
-  spawn:
-    description: Teleport to Spawn
-    usage: /spawn
-    permission: haven.command.spawn
-  delspawn:
-    description: Delete SpawnPoint
-    usage: /delspawn
-    permission: haven.command.deletespawn
-  hvreload:
-    description: Reload plugin
-    usage: /hvreload
-    permission: haven.command.hvreload
+    usage: /hv <subcommand>
+    permission: haven.use
