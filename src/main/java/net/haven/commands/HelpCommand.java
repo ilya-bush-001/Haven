@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import net.haven.Haven;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class HelpCommand implements CommandExecutor {
@@ -17,6 +18,13 @@ public class HelpCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+        Player player = (Player) sender;
+
+        if (!player.hasPermission("haven.command.help")) {
+            player.sendMessage(ChatColor.RED + "You don't have permissions!");
+            return true;
+        }
+
         showHelp(sender);
         return true;
     }
