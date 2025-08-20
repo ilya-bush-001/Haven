@@ -12,7 +12,6 @@ public class CommandHandler implements CommandExecutor {
 
     private final Haven plugin;
     private final SetSpawnCommand setSpawnCommand;
-    private final SpawnCommand spawnCommand;
     private final DeleteSpawnCommand deleteSpawnCommand;
     private final ReloadCommand reloadCommand;
     private final HelpCommand helpCommand;
@@ -20,7 +19,6 @@ public class CommandHandler implements CommandExecutor {
     public CommandHandler(Haven plugin) {
         this.plugin = plugin;
         this.setSpawnCommand = new SetSpawnCommand(plugin);
-        this.spawnCommand = new SpawnCommand(plugin);
         this.deleteSpawnCommand = new DeleteSpawnCommand(plugin);
         this.reloadCommand = new ReloadCommand(plugin);
         this.helpCommand = new HelpCommand(plugin);
