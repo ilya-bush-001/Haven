@@ -22,6 +22,7 @@ public class HelpCommand implements CommandExecutor {
 
         if (!player.hasPermission("haven.command.help")) {
             player.sendMessage(ChatColor.RED + "You don't have permissions!");
+            sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
             return true;
         }
 
