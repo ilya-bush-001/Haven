@@ -23,6 +23,22 @@ public class HavenCommand implements CommandExecutor {
             messages.sendMessage(sender, "messages.usage");
             return true;
         }
+
+        String subCommand = args[0].toLowerCase();
+
+        switch (subCommand) {
+            case "setspawn":
+                return setSpawnCommand(sender, args);
+            case "spawn":
+                return spawnCommand(sender, args);
+            case "delspawn":
+                return delSpawnCommand(sender, args);
+            case "reload":
+                return reloadCommand(sender, args);
+            default:
+                messages.sendMessage(sender, "messages.unknown-command");
+                return true;
+        }
     }
 
 }
