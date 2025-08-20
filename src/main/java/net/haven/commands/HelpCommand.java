@@ -35,7 +35,8 @@ public class HelpCommand implements CommandExecutor {
                 ChatColor.YELLOW + "/hv setspawn" + ChatColor.GRAY + " - Set spawn point",
                 ChatColor.YELLOW + "/hv delspawn" + ChatColor.GRAY + " - Delete spawn point",
                 ChatColor.YELLOW + "/hv reload" + ChatColor.GRAY + " - Reload configuration",
-                ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help"
+                ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help",
+                ChatColor.YELLOW + "/spawn" + ChatColor.GRAY + " - Teleport to spawn"
         };
 
         sender.sendMessage(helpMessages);

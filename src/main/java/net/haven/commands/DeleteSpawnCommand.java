@@ -31,7 +31,7 @@ public class DeleteSpawnCommand implements CommandExecutor {
         }
 
         if (!plugin.getConfig().contains("spawn.world")) {
-            sender.sendMessage(plugin.getMessage("messages.setspawn.success", "&aSpawn point successfully set!"));
+            sender.sendMessage(plugin.getMessage("messages.delspawn.success", "&aSpawn point successfully set!"));
             return true;
         }
 
