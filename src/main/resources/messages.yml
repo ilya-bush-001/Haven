@@ -8,7 +8,7 @@ messages:
     success: "&aSpawn point successfully set!"
 
   spawn:
-    success: "&aTeleporting to spawn..."
+    success: "&aTeleported to spawn!"
     not-set: "&cSpawn point not set!"
 
   delspawn:
