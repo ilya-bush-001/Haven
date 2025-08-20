@@ -45,7 +45,8 @@ public class CommandHandler implements CommandExecutor {
             case "reload":
                 return reloadCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "help":
-                return helpCommand;
+                helpCommand.showHelp(sender);
+                return true;
             default:
                 sender.sendMessage(ChatColor.RED + plugin.getConfig().getString("messages.unknown-command", "&cUnknown command!"));
                 return true;

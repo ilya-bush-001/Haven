@@ -14,6 +14,8 @@ public final class Haven extends JavaPlugin {
     public void onEnable() {
         getLogger().info("Haven enabled!");
 
+        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new SetSpawnCommand(this));
+
         Objects.requireNonNull(this.getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
         Objects.requireNonNull(this.getCommand("delspawn")).setExecutor(new DeleteSpawnCommand(this));
