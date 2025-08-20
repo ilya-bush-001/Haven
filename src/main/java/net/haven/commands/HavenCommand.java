@@ -2,9 +2,11 @@ package net.haven.commands;
 
 import net.haven.Haven;
 import net.haven.utils.MessageUtils;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class HavenCommand implements CommandExecutor {
@@ -39,6 +41,52 @@ public class HavenCommand implements CommandExecutor {
                 messages.sendMessage(sender, "messages.unknown-command");
                 return true;
         }
+    }
+
+    private boolean delSpawnCommand(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("haven.command.delspawn")) {
+            messages.sendMessage(sender, "messages.no-permission");
+            return true;
+        }
+
+        if (!plugin.getConfig().contains == null) {
+            messages.sendMessage(sender, "messages.delspawn.not-set");
+            return true;
+        }
+
+        player.teleport(location);
+        messages.sendMessage(sender, "messages.delspawn.success");
+        return true;
+    }
+
+    private boolean setSpawnCommand(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("haven.command.setspawn")) {
+            messages.sendMessage(sender, "messages.no-permission");
+            return true;
+        }
+
+        Player player = (Player) sender;
+        Location location = player.getLocation();
+
+        if (location == null) {
+            messages.sendMessage(sender, "messages.spawn.not-set");
+            return true;
+        }
+
+        player.teleport(location);
+        messages.sendMessage(sender, "messages.spawn.spawn-success");
+        return true;
+    }
+
+    private boolean reloadCommand(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("haven.command.reload")) {
+            messages.sendMessage(sender, "messages.no-permission");
+            return true;
+        }
+
+        plugin.reloadConfig();
+        plugin.loadSpawnLocation();
+        plugin.reloadConfig();
     }
 
 }
