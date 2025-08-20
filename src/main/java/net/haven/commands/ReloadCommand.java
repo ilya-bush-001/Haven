@@ -25,7 +25,6 @@ public class ReloadCommand implements CommandExecutor {
         try {
             plugin.reloadConfig();
             plugin.reloadMessagesConfig();
-            sender.sendMessage(ChatColor.GREEN + "You have successfully reloaded the plugin!");
             sender.sendMessage(plugin.getMessage("messages.reload.success", "&aConfiguration reloaded!"));
             return true;
         } catch (Exception e) {
