@@ -1,9 +1,6 @@
 package net.haven;
 
-import net.haven.commands.DeleteSpawnCommand;
-import net.haven.commands.ReloadCommand;
-import net.haven.commands.SetSpawnCommand;
-import net.haven.commands.SpawnCommand;
+import net.haven.commands.*;
 import net.haven.utils.MessageUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,12 +12,16 @@ public final class Haven extends JavaPlugin {
     public void onEnable() {
         messageUtils = new MessageUtils(this);
 
-        getLogger().info("Haven enabled!");
-
         HvCommand hvCommand = new HvCommand(this);
         Objects.requireNonNull(this.getCommand("hv")).setExecutor(new HavenCommand(this));
+        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new DeleteSpawnCommand(this));
+        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new ReloadCommand(this));
+        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new SetSpawnCommand(this));
+        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new SpawnCommand(this));
 
         saveConfig();
+
+        getLogger().info("Haven enabled!");
     }
 
     @Override
