@@ -65,15 +65,16 @@ public class HavenTabCompleter implements TabCompleter {
 
         switch (subCommand) {
             case "setspawn":
-                return hasAccessToCommand(sender, args);
+                return hasFullAccess || sender.hasPermission("haven.command.setspawn");
             case "delspawn":
-                return hasAccessToCommand(sender, args);
+                return hasFullAccess || sender.hasPermission("haven.command.delspawn");
             case "reload":
-                return hasAccessToCommand(sender, args);
+                return hasFullAccess || sender.hasPermission("haven.command.reload");
             case "spawn":
-                return hasAccessToCommand(sender, args);
             case "help":
-                return hasAccessToCommand(sender, args);
+                return true;
+            default:
+                return false;
         }
     }
 }
