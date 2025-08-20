@@ -33,4 +33,8 @@ public final class Haven extends JavaPlugin {
     public String getMessage(String path, Object... replacements) {
         return ConfigManager.getMessage(path, replacements);
     }
+
+    public void reloadMessagesConfig() {
+        ConfigManager.reloadMessages();
+    }
 }

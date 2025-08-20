@@ -46,4 +46,8 @@ public class ConfigManager {
         }
         return message;
     }
+
+    public static void reloadMessages() {
+        loadMessages();
+    }
 }
