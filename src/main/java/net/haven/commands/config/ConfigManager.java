@@ -8,9 +8,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
 public class ConfigManager {
+    private static JavaPlugin plugin;
     private static FileConfiguration messagesConfig;
 
-    public static void loadMessages(JavaPlugin plugin) {
+    public static void initialize(JavaPlugin pluginInstance) {
+        plugin = pluginInstance;
+        loadMessages();
+    }
+
+    public static void loadMessages() {
         File messagesFile = new File(plugin.getDataFolder(), "messages.yml");
         if (!messagesFile.exists()) {
             plugin.saveResource("messages.yml", false);

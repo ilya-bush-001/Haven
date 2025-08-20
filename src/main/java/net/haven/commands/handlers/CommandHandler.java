@@ -44,7 +44,7 @@ public class CommandHandler implements CommandExecutor {
                 helpCommand.showHelp(sender);
                 return true;
             default:
-                sender.sendMessage(ChatColor.RED + plugin.getConfig().getString("messages.unknown-command", "&cUnknown command!"));
+                sender.sendMessage(plugin.getMessage("messages.unknown-command", "&cUnknown command!"));
                 return true;
         }
     }
