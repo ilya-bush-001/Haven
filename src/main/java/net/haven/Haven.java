@@ -17,7 +17,8 @@ public final class Haven extends JavaPlugin {
 
         getLogger().info("Haven enabled!");
 
-        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new SetSpawnCommand(this));
+        HvCommand hvCommand = new HvCommand(this);
+        Objects.requireNonNull(this.getCommand("hv")).setExecutor(new HavenCommand(this));
 
         saveConfig();
     }
