@@ -7,7 +7,7 @@ description: A flexible plugin for setting the spawnpoint!
 website: https://www.youtube.com/@IlyaBush-001
 commands:
   hv:
-    description: Set SpawnPoint
+    description: All commands allowed
     usage: /hv <subcommand>
     permission: haven.*
   spawn:
