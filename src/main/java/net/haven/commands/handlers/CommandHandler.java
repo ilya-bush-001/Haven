@@ -38,8 +38,6 @@ public class CommandHandler implements CommandExecutor {
         switch (subCommand) {
             case "setspawn":
                 return setSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "spawn":
-                return spawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "delspawn":
                 return deleteSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "reload":

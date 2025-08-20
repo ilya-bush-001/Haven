@@ -25,7 +25,6 @@ public class HelpCommand implements CommandExecutor {
         String[] helpMessages = {
                 ChatColor.GOLD + "=== " + ChatColor.GREEN + "Haven Commands" + ChatColor.GOLD + " ===",
                 ChatColor.YELLOW + "/hv setspawn" + ChatColor.GRAY + " - Set spawn point",
-                ChatColor.YELLOW + "/hv spawn" + ChatColor.GRAY + " - Teleport to spawn",
                 ChatColor.YELLOW + "/hv delspawn" + ChatColor.GRAY + " - Delete spawn point",
                 ChatColor.YELLOW + "/hv reload" + ChatColor.GRAY + " - Reload configuration",
                 ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help"
