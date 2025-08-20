@@ -1,4 +1,10 @@
 package net.haven.commands;
 
-public class HavenCommand {
+import net.haven.Haven;
+import net.haven.utils.MessageUtils;
+import org.bukkit.command.CommandExecutor;
+
+public class HavenCommand implements CommandExecutor {
+    private final Haven plugin;
+    private final MessageUtils messages;
 }
