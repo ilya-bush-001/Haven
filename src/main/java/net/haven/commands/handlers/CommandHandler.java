@@ -2,7 +2,6 @@ package net.haven.commands.handlers;
 
 import net.haven.Haven;
 import net.haven.commands.*;
-import net.haven.commands.config.ConfigLocalization;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -1,7 +1,7 @@
 package net.haven;
 
 import net.haven.commands.SpawnCommand;
-import net.haven.commands.config.ConfigLocalization;
+import net.haven.config.ConfigLocalization;
 import net.haven.commands.handlers.CommandHandler;
 import net.haven.completers.HavenTabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;

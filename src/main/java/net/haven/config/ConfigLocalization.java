@@ -1,4 +1,4 @@
-package net.haven.commands.config;
+package net.haven.config;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
