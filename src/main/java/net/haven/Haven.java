@@ -28,10 +28,6 @@ public final class Haven extends JavaPlugin {
         getLogger().info("Haven disabled!");
     }
 
-    public String getMessage(String path) {
-        return ConfigManager.getMessage(path);
-    }
-
     public String getMessage(String path, Object... replacements) {
         return ConfigManager.getMessage(path, replacements);
     }
