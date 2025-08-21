@@ -1,19 +1,19 @@
 messages:
-  no-permissions: "&cYou don't have permission to execute this command!"
-  unknown-command: "&cUnknown command! Use &6/hv help"
-  usage: "&6Usage: /hv <setspawn|delspawn|reload>"
-  error: "&cYou must be a player to use this command!"
+  no-permissions: "&c[✘] You don't have permission to execute this command!"
+  unknown-command: "&c[✘] Unknown command! Use &6/hv help"
+  usage: "&c[✘] Usage: /hv <setspawn|delspawn|reload>"
+  error: "&c[✘] You must be a player to use this command!"
 
   setspawn:
-    success: "&aSpawn point successfully set!"
+    success: "&a[✔] Spawn point successfully set!"
 
   spawn:
     success: "&aTeleported to spawn!"
-    not-set: "&cSpawn point not set!"
+    not-set: "&c[✘] Spawn point not set!"
 
   delspawn:
-    success: "&aSpawn point deleted!"
-    not-set: "&cSpawn point was not set!"
+    success: "&a[✔] Spawn point &cdeleted&a!"
+    not-set: "&c[✘] Spawn point was not set!"
 
   reload:
-    success: "&aConfiguration reloaded!"
+    success: "&a[✔] Configuration reloaded!"

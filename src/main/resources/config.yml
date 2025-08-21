@@ -1,1 +1,1 @@
-language: english
+language: english # Plugin language | Default: English | Available languages: Russian (ru), Ukrainian (ua)

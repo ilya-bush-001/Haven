@@ -20,8 +20,8 @@ public final class Haven extends JavaPlugin {
         localization.loadLanguages();
 
         Objects.requireNonNull(this.getCommand("hv")).setExecutor(new CommandHandler(this));
-        Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
         Objects.requireNonNull(this.getCommand("hv")).setTabCompleter(new HavenTabCompleter(this));
+        Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
 
         getLogger().info("Haven enabled!");
     }
