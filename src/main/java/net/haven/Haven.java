@@ -1,7 +1,7 @@
 package net.haven;
 
 import net.haven.commands.SpawnCommand;
-import net.haven.commands.config.ConfigManager;
+import net.haven.commands.config.ConfigLocalization;
 import net.haven.commands.handlers.CommandHandler;
 import net.haven.completers.HavenTabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,12 +9,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 
 public final class Haven extends JavaPlugin {
+    private ConfigLocalization localization;
 
     @Override
     public void onEnable() {
-        saveConfig();
+        saveDefaultConfig();
+        reloadConfig();
 
-        ConfigManager.initialize(this);
+        localization = new ConfigLocalization(this);
+        localization.loadLanguages();
 
         Objects.requireNonNull(this.getCommand("hv")).setExecutor(new CommandHandler(this));
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
@@ -23,16 +26,17 @@ public final class Haven extends JavaPlugin {
         getLogger().info("Haven enabled!");
     }
 
-    @Override
-    public void onDisable() {
-        getLogger().info("Haven disabled!");
-    }
-
     public String getMessage(String path, Object... replacements) {
-        return ConfigManager.getMessage(path, replacements);
+        String message = localization.getMessage(path);
+
+        for (int i = 0; i < replacements.length; i++) {
+            message = message.replace("{" + i + "}", String.valueOf(replacements[i]));
+        }
+
+        return message;
     }
 
-    public void reloadMessagesConfig() {
-        ConfigManager.reloadMessages();
+    public ConfigLocalization getLocalization() {
+        return localization;
     }
 }

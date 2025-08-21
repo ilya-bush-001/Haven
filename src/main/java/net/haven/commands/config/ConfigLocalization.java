@@ -24,7 +24,6 @@ public class ConfigLocalization {
     }
 
     public void loadLanguages() {
-        plugin.saveConfig();
         plugin.reloadConfig();
         defaultLanguage = plugin.getConfig().getString("language", "english");
 
@@ -36,23 +35,35 @@ public class ConfigLocalization {
         saveLanguageFile("english.yml");
         saveLanguageFile("russian.yml");
 
+        languages.clear();
+
         File[] languageFiles = languagesFolder.listFiles((dir, name) -> name.endsWith(".yml"));
         if (languageFiles != null) {
             for (File file : languageFiles) {
                 String languageName = file.getName().replace(".yml", "");
-                FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+
+                YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 
                 try {
                     InputStream stream = plugin.getResource("languages/" + file.getName());
                     if (stream != null) {
-                        configuration.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(stream, StandardCharsets.UTF_8)));
+                        YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(
+                                new InputStreamReader(stream, StandardCharsets.UTF_8));
+
+                        for (String key : defaultConfig.getKeys(true)) {
+                            if (!configuration.contains(key)) {
+                                configuration.set(key, defaultConfig.get(key));
+                            }
+                        }
+                        configuration.save(file);
                     }
                 } catch (Exception e) {
-                    plugin.getLogger().warning("Cannot load default messages for " + languageName);
+                    plugin.getLogger().warning("Cannot load default messages for " + languageName + ": " + e.getMessage());
                 }
+
                 languages.put(languageName, configuration);
                 this.languagesFiles.put(languageName, file);
-                plugin.getLogger().info("Loaded language: " + languageName);
+                plugin.getLogger().info("Loaded language: " + languageName + " with " + configuration.getKeys(true).size() + " messages");
             }
         }
 

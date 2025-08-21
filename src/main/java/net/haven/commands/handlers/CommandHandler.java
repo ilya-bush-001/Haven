@@ -2,7 +2,7 @@ package net.haven.commands.handlers;
 
 import net.haven.Haven;
 import net.haven.commands.*;
-import net.md_5.bungee.api.ChatColor;
+import net.haven.commands.config.ConfigLocalization;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -44,7 +44,7 @@ public class CommandHandler implements CommandExecutor {
                 helpCommand.showHelp(sender);
                 return true;
             default:
-                sender.sendMessage(plugin.getMessage("messages.unknown-command", "&cUnknown command!"));
+                sender.sendMessage(plugin.getMessage("messages.unknown-command"));
                 return true;
         }
     }

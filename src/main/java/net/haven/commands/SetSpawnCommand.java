@@ -41,6 +41,8 @@ public class SetSpawnCommand implements CommandExecutor {
 
         plugin.saveConfig();
 
+        plugin.getLocalization().reload();
+
         sender.sendMessage(plugin.getMessage("messages.setspawn.success", "&aSpawn point successfully set!"));
         return true;
     }

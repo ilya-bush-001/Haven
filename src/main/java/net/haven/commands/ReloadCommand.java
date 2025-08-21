@@ -24,7 +24,7 @@ public class ReloadCommand implements CommandExecutor {
 
         try {
             plugin.reloadConfig();
-            plugin.reloadMessagesConfig();
+            plugin.getLocalization().reload();
             sender.sendMessage(plugin.getMessage("messages.reload.success", "&aConfiguration reloaded!"));
             return true;
         } catch (Exception e) {
