@@ -63,12 +63,10 @@ public class ConfigLocalization {
 
                 languages.put(languageName, configuration);
                 this.languagesFiles.put(languageName, file);
-                plugin.getLogger().info("Loaded language: " + languageName + " with " + configuration.getKeys(true).size() + " messages");
             }
         }
 
         if (!languages.containsKey(defaultLanguage)) {
-            plugin.getLogger().warning("Default language '" + defaultLanguage + "' not found! Using first available language.");
             if (!languages.isEmpty()) {
                 defaultLanguage = languages.keySet().iterator().next();
             } else {
