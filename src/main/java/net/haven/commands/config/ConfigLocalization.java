@@ -26,7 +26,7 @@ public class ConfigLocalization {
     public void loadLanguages() {
         plugin.saveConfig();
         plugin.reloadConfig();
-        defaultLanguage = plugin.getConfig().getString("language", "en");
+        defaultLanguage = plugin.getConfig().getString("language", "english");
 
         File languagesFolder = new File(plugin.getDataFolder(), "languages");
         if (!languagesFolder.exists()) {
