@@ -32,11 +32,12 @@ public class HelpCommand implements CommandExecutor {
     public void showHelp(CommandSender sender) {
         String[] helpMessages = {
                 ChatColor.GOLD + "=== " + ChatColor.GREEN + "Haven Commands" + ChatColor.GOLD + " ===",
-                ChatColor.YELLOW + "/hv setspawn" + ChatColor.GRAY + " - Set spawn point",
-                ChatColor.YELLOW + "/hv delspawn" + ChatColor.GRAY + " - Delete spawn point",
-                ChatColor.YELLOW + "/hv reload" + ChatColor.GRAY + " - Reload configuration",
-                ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help",
-                ChatColor.YELLOW + "/spawn" + ChatColor.GRAY + " - Teleport to spawn"
+                ChatColor.YELLOW + "/hv setspawn" + ChatColor.GRAY + " - Set spawnpoint;",
+                ChatColor.YELLOW + "/hv delspawn" + ChatColor.GRAY + " - Delete spawnpoint;",
+                ChatColor.YELLOW + "/hv reload" + ChatColor.GRAY + " - Reload configuration;",
+                ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help;",
+                ChatColor.YELLOW + "/spawn" + ChatColor.GRAY + " - Teleport to spawn.",
+                ChatColor.GOLD + "======"
         };
 
         sender.sendMessage(helpMessages);
