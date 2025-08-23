@@ -1,0 +1,19 @@
+messages:
+  no-permissions: "&c[✘] Nie masz uprawnień do wykonania tej komendy!"
+  unknown-command: "&c[✘] Nieznana komenda! Użyj &6/hv help&c, aby uzyskać pomoc."
+  usage: "&c[✘] Użycie: /hv <setspawn|delspawn|reload>"
+  error: "&c[✘] Musisz być graczem, aby użyć tej komendy!"
+
+  setspawn:
+    success: "&a[✔] Punkt spawn został pomyślnie ustawiony!"
+
+  spawn:
+    success: "&a[✔] Przeteleportowano do spawnu!"
+    not-set: "&c[✘] Punkt spawn nie został ustawiony!"
+
+  delspawn:
+    success: "&a[✔] Punkt spawn został &cusunięty&a!"
+    not-set: "&c[✘] Punkt spawn nie został ustawiony!"
+
+  reload:
+    success: "&a[✔] Konfiguracja została przeładowana!"

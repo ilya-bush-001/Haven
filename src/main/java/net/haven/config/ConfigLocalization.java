@@ -38,6 +38,7 @@ public class ConfigLocalization {
         saveLanguageFile("spanish.yml");
         saveLanguageFile("german.yml");
         saveLanguageFile("french.yml");
+        saveLanguageFile("polish.yml");
 
         languages.clear();
 
