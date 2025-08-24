@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigLocalization {
@@ -48,23 +50,6 @@ public class ConfigLocalization {
                 String languageName = file.getName().replace(".yml", "");
 
                 YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
-
-                try {
-                    InputStream stream = plugin.getResource("languages/" + file.getName());
-                    if (stream != null) {
-                        YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(
-                                new InputStreamReader(stream, StandardCharsets.UTF_8));
-
-                        for (String key : defaultConfig.getKeys(true)) {
-                            if (!configuration.contains(key)) {
-                                configuration.set(key, defaultConfig.get(key));
-                            }
-                        }
-                        configuration.save(file);
-                    }
-                } catch (Exception e) {
-                    plugin.getLogger().warning("Cannot load default messages for " + languageName + ": " + e.getMessage());
-                }
 
                 languages.put(languageName, configuration);
                 this.languagesFiles.put(languageName, file);
@@ -156,5 +141,37 @@ public class ConfigLocalization {
 
     public Map<String,FileConfiguration> getLanguages() {
         return languages;
+    }
+
+    public List<String> getMessageList(String key) {
+        return getMessageList(key, null, new HashMap<>());
+    }
+
+    public List<String> getMessageList(String key, Player player, Map<String, String> placeholders) {
+        FileConfiguration configuration = languages.get(defaultLanguage);
+
+        if (configuration == null || !configuration.contains(key)) {
+            return new ArrayList<>();
+        }
+
+        List<String> messages = configuration.getStringList(key);
+        List<String> formattedMessages = new ArrayList<>();
+
+        for (String message : messages) {
+            if (player != null) {
+                message = message.replace("%player%", player.getName());
+            }
+
+            if (placeholders != null) {
+                for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                    message = message.replace("%" + entry.getKey() + "%", entry.getValue());
+                }
+            }
+
+            message = message.replace('&', '§');
+            formattedMessages.add(message);
+        }
+
+        return formattedMessages;
     }
 }

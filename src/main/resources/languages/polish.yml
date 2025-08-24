@@ -17,3 +17,12 @@ messages:
 
   reload:
     success: "&a[✔] Konfiguracja została przeładowana!"
+
+  help:
+    - "&e============== &6Pomoc Haven &e==============="
+    - "&6/hv setspawn &e- Ustaw punkt spawn;"
+    - "&6/hv delspawn &e- Usuń punkt spawn;"
+    - "&6/hv reload &e- Przeładuj konfigurację pluginu;"
+    - "&6/hv help &e- Pokaż tę pomoc;"
+    - "&6/spawn &e- Teleportuj się do spawnu."
+    - "&e========================================="

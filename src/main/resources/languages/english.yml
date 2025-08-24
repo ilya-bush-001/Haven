@@ -17,3 +17,12 @@ messages:
 
   reload:
     success: "&a[✔] Configuration reloaded!"
+
+  help:
+    - "&e============== &6Haven Help &e==============="
+    - "/hv setspawn - &eset spawnpoint;"
+    - "/hv delspawn - &edelete spawnpoint;"
+    - "/hv reload - &ereload plugin configuration;"
+    - "/hv help - &eshow this help;"
+    - "/spawn - &eteleport to spawn."
+    - "&e========================================="

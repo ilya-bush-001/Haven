@@ -17,3 +17,12 @@ messages:
 
   reload:
     success: "&a[✔] Konfiguration wurde neu geladen!"
+
+  help:
+    - "&e============== &6Haven-Hilfe &e==============="
+    - "&6/hv setspawn &e- Spawnpunkt festlegen;"
+    - "&6/hv delspawn &e- Spawnpunkt löschen;"
+    - "&6/hv reload &e- Plugin-Konfiguration neu laden;"
+    - "&6/hv help &e- Diese Hilfe anzeigen;"
+    - "&6/spawn &e- Zum Spawn teleportieren."
+    - "&e========================================="
