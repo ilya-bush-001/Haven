@@ -32,20 +32,19 @@ public class CommandHandler implements CommandExecutor {
 
         String subCommand = args[0].toLowerCase();
 
-        switch (subCommand) {
-            case "setspawn":
-                return setSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "delspawn":
-                return deleteSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "reload":
-                return reloadCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "help":
+        return switch (subCommand) {
+            case "setspawn" -> setSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
+            case "delspawn" -> deleteSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
+            case "reload" -> reloadCommand.onCommand(sender, cmd, label, getSubArgs(args));
+            case "help" -> {
                 helpCommand.showHelp(sender);
-                return true;
-            default:
+                yield true;
+            }
+            default -> {
                 sender.sendMessage(plugin.getMessage("messages.unknown-command"));
-                return true;
-        }
+                yield true;
+            }
+        };
     }
 
     private String[] getSubArgs(String[] args) {

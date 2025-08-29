@@ -4,11 +4,8 @@ import net.haven.commands.SpawnCommand;
 import net.haven.config.ConfigLocalization;
 import net.haven.commands.handlers.CommandHandler;
 import net.haven.completers.HavenTabCompleter;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
