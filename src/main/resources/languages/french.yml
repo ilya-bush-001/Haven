@@ -1,28 +1,35 @@
 messages:
-  no-permissions: "&c[✘] Vous n'avez pas la permission d'exécuter cette commande!"
-  unknown-command: "&c[✘] Commande inconnue! Utilisez &6/hv help&c pour obtenir de l'aide."
-  usage: "&c[✘] Utilisation: /hv <setspawn|delspawn|reload>"
-  error: "&c[✘] Vous devez être un joueur pour utiliser cette commande!"
 
+  # La plupart des messages d'utilisation
+  no-permissions: "&c[✘] Vous n'avez pas la permission d'exécuter cette commande !" # Si vous n'avez pas assez de permissions
+  unknown-command: "&c[✘] Commande inconnue ! Utilisez &6/hv help" # Si la commande est inconnue
+  usage: "&c[✘] Utilisation : /hv <setspawn|delspawn|reload>" # Utilisation des commandes du plugin
+  error: "&c[✘] Vous devez être un joueur pour utiliser cette commande !" # Si vous écrivez certaines commandes depuis la console, vous n'êtes pas autorisé à le faire.
+
+  # Catégorie pour la commande /hv setspawn
   setspawn:
-    success: "&a[✔] Point de spawn défini avec succès!"
+    success: "&a[✔] Point de spawn défini avec succès !" # Si le spawn est défini avec succès
 
+  # Catégorie pour la commande /hv spawn
   spawn:
-    success: "&a[✔] Téléporté au point de spawn!"
-    not-set: "&c[✘] Le point de spawn n'est pas défini!"
+    success: "&aTéléporté au spawn !" # Si le joueur est téléporté au spawn
+    not-set: "&c[✘] Le spawn n'est pas défini !" # Si le point de spawn n'est pas défini
 
+  # Catégorie pour la commande /hv delspawn
   delspawn:
-    success: "&a[✔] Point de spawn &csupprimé&a!"
-    not-set: "&c[✘] Le point de spawn n'a pas été défini!"
+    success: "&a[✔] Spawn &csupprimé&a !" # Si le point de spawn est supprimé
+    not-set: "&c[✘] Le spawn n'était pas défini !" # Si le point de spawn n'est pas défini
 
+  # Catégorie pour la commande /hv reload
   reload:
-    success: "&a[✔] Configuration rechargée!"
+    success: "&a[✔] Configuration rechargée !" # Si le plugin est rechargé
 
+  # Catégorie pour la commande /hv help (je ne pense pas avoir besoin d'expliquer chaque ligne ici.)
   help:
-    - "&e============== &6Aide de Haven &e==============="
-    - "&6/hv setspawn &e- Définir le point de spawn;"
-    - "&6/hv delspawn &e- Supprimer le point de spawn;"
-    - "&6/hv reload &e- Recharger la configuration du plugin;"
-    - "&6/hv help &e- Afficher cette aide;"
-    - "&6/spawn &e- Se téléporter au point de spawn."
+    - "&e============== &6Aide Haven &e==============="
+    - "/hv setspawn - &edéfinir le point de spawn ;"
+    - "/hv delspawn - &esupprimer le point de spawn ;"
+    - "/hv reload - &erecharger la configuration du plugin ;"
+    - "/hv help - &eafficher cette aide ;"
+    - "/spawn - &eset téléporter au spawn."
     - "&e========================================="

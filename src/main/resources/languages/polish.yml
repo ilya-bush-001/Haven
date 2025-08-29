@@ -1,28 +1,35 @@
 messages:
-  no-permissions: "&c[✘] Nie masz uprawnień do wykonania tej komendy!"
-  unknown-command: "&c[✘] Nieznana komenda! Użyj &6/hv help&c, aby uzyskać pomoc."
-  usage: "&c[✘] Użycie: /hv <setspawn|delspawn|reload>"
-  error: "&c[✘] Musisz być graczem, aby użyć tej komendy!"
 
+  # Większość komunikatów użycia
+  no-permissions: "&c[✘] Nie masz uprawnień do wykonania tej komendy!" # Jeśli nie masz wystarczających uprawnień
+  unknown-command: "&c[✘] Nieznana komenda! Użyj &6/hv help" # Jeśli komenda jest nieznana
+  usage: "&c[✘] Użycie: /hv <setspawn|delspawn|reload>" # Użycie komend pluginu
+  error: "&c[✘] Musisz być graczem, aby użyć tej komendy!" # Jeśli wpisujesz komendę z konsoli, nie możesz tego zrobić
+
+  # Kategoria dla komendy /hv setspawn
   setspawn:
-    success: "&a[✔] Punkt spawn został pomyślnie ustawiony!"
+    success: "&a[✔] Punkt spawnu został pomyślnie ustawiony!" # Jeśli spawn został ustawiony
 
+  # Kategoria dla komendy /hv spawn
   spawn:
-    success: "&a[✔] Przeteleportowano do spawnu!"
-    not-set: "&c[✘] Punkt spawn nie został ustawiony!"
+    success: "&aTeleportowano na spawn!" # Jeśli gracz został teleportowany
+    not-set: "&c[✘] Spawn nie został ustawiony!" # Jeśli spawn nie jest ustawiony
 
+  # Kategoria dla komendy /hv delspawn
   delspawn:
-    success: "&a[✔] Punkt spawn został &cusunięty&a!"
-    not-set: "&c[✘] Punkt spawn nie został ustawiony!"
+    success: "&a[✔] Spawn &cusunięty&a!" # Jeśli spawn został usunięty
+    not-set: "&c[✘] Spawn nie był ustawiony!" # Jeśli spawn nie został ustawiony
 
+  # Kategoria dla komendy /hv reload
   reload:
-    success: "&a[✔] Konfiguracja została przeładowana!"
+    success: "&a[✔] Konfiguracja przeładowana!" # Jeśli plugin został przeładowany
 
+  # Kategoria dla komendy /hv help
   help:
     - "&e============== &6Pomoc Haven &e==============="
-    - "&6/hv setspawn &e- Ustaw punkt spawn;"
-    - "&6/hv delspawn &e- Usuń punkt spawn;"
-    - "&6/hv reload &e- Przeładuj konfigurację pluginu;"
-    - "&6/hv help &e- Pokaż tę pomoc;"
-    - "&6/spawn &e- Teleportuj się do spawnu."
+    - "/hv setspawn - &eustaw punkt spawnu;"
+    - "/hv delspawn - &eusun punkt spawnu;"
+    - "/hv reload - &eprzeładuj konfigurację pluginu;"
+    - "/hv help - &epokaż tę pomoc;"
+    - "/spawn - &eteleportuj się na spawn."
     - "&e========================================="

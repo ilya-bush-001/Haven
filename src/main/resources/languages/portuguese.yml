@@ -1,0 +1,35 @@
+messages:
+
+  # A maioria das mensagens de uso
+  no-permissions: "&c[✘] Você não tem permissão para executar este comando!" # Se não tiver permissões suficientes
+  unknown-command: "&c[✘] Comando desconhecido! Use &6/hv help" # Se o comando for desconhecido
+  usage: "&c[✘] Uso: /hv <setspawn|delspawn|reload>" # Uso dos comandos do plugin
+  error: "&c[✘] Você deve ser um jogador para usar este comando!" # Se tentar usar pela console
+
+  # Categoria para o comando /hv setspawn
+  setspawn:
+    success: "&a[✔] Ponto de spawn definido com sucesso!" # Se o spawn foi definido
+
+  # Categoria para o comando /hv spawn
+  spawn:
+    success: "&aTeleportado para o spawn!" # Se o jogador foi teleportado
+    not-set: "&c[✘] Spawn não definido!" # Se o spawn não foi configurado
+
+  # Categoria para o comando /hv delspawn
+  delspawn:
+    success: "&a[✔] Spawn &cremovido&a!" # Se o spawn foi removido
+    not-set: "&c[✘] O spawn não estava definido!" # Se não foi configurado
+
+  # Categoria para o comando /hv reload
+  reload:
+    success: "&a[✔] Configuração recarregada!" # Se o plugin foi recarregado
+
+  # Categoria para o comando /hv help
+  help:
+    - "&e============== &6Ajuda Haven &e==============="
+    - "/hv setspawn - &edefinir ponto de spawn;"
+    - "/hv delspawn - &eremover ponto de spawn;"
+    - "/hv reload - &erecarregar configuração do plugin;"
+    - "/hv help - &emostrar esta ajuda;"
+    - "/spawn - &eteleportar para o spawn."
+    - "&e========================================="

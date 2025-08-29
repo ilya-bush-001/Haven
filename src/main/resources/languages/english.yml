@@ -1,23 +1,30 @@
 messages:
-  no-permissions: "&c[✘] You don't have permission to execute this command!"
-  unknown-command: "&c[✘] Unknown command! Use &6/hv help"
-  usage: "&c[✘] Usage: /hv <setspawn|delspawn|reload>"
-  error: "&c[✘] You must be a player to use this command!"
 
+  # Most usage messages
+  no-permissions: "&c[✘] You don't have permission to execute this command!" # If you don't have enough permissions
+  unknown-command: "&c[✘] Unknown command! Use &6/hv help" # If the command is unknown
+  usage: "&c[✘] Usage: /hv <setspawn|delspawn|reload>" # Usage plugin commands
+  error: "&c[✘] You must be a player to use this command!" # If you are writing certain commands from the console, you will not be allowed to do so.
+
+  # Category for command /hv setspawn
   setspawn:
-    success: "&a[✔] Spawn point successfully set!"
+    success: "&a[✔] Spawn point successfully set!" # If spawn successfully set
 
+  # Category for command /hv spawn
   spawn:
-    success: "&aTeleported to spawn!"
-    not-set: "&c[✘] Spawn point not set!"
+    success: "&aTeleported to spawn!" # If teleported to spawn
+    not-set: "&c[✘] Spawn not set!" # If spawnpoint not set
 
+  # Category for command /hv delspawn
   delspawn:
-    success: "&a[✔] Spawn point &cdeleted&a!"
-    not-set: "&c[✘] Spawn point was not set!"
+    success: "&a[✔] Spawn &cdeleted&a!" # If spawnpoint deleted
+    not-set: "&c[✘] Spawn was not set!" # If spawnpoint not set
 
+  # Category for command /hv reload
   reload:
-    success: "&a[✔] Configuration reloaded!"
+    success: "&a[✔] Configuration reloaded!" # If plugin reloaded
 
+  # Category for command /hv help (I don't think I need to explain every line here.)
   help:
     - "&e============== &6Haven Help &e==============="
     - "/hv setspawn - &eset spawnpoint;"
