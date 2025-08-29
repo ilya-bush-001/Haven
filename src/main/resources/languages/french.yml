@@ -24,7 +24,7 @@ messages:
   reload:
     success: "&a[✔] Configuration rechargée !" # Si le plugin est rechargé
 
-  # Catégorie pour la commande /hv help (je ne pense pas avoir besoin d'expliquer chaque ligne ici.)
+  # Catégorie pour la commande /hv help
   help:
     - "&e============== &6Aide Haven &e==============="
     - "/hv setspawn - &edéfinir le point de spawn ;"

@@ -24,7 +24,7 @@ messages:
   reload:
     success: "&a[✔] Configuration reloaded!" # If plugin reloaded
 
-  # Category for command /hv help (I don't think I need to explain every line here.)
+  # Category for command /hv help
   help:
     - "&e============== &6Haven Help &e==============="
     - "/hv setspawn - &eset spawnpoint;"

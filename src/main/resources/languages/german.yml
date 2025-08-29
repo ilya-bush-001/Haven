@@ -24,7 +24,7 @@ messages:
   reload:
     success: "&a[✔] Konfiguration neu geladen!" # Wenn das Plugin neu geladen wurde
 
-  # Kategorie für den Befehl /hv help (ich denke, ich muss hier nicht jede Zeile erklären.)
+  # Kategorie für den Befehl /hv help
   help:
     - "&e============== &6Haven Hilfe &e==============="
     - "/hv setspawn - &eSpawnpunkt setzen;"
