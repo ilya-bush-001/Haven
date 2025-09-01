@@ -17,12 +17,10 @@ public class DeleteSpawnCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(plugin.getMessage("messages.error", "&cYou must be a player to use this command!"));
             return true;
         }
-
-        Player player = (Player) sender;
 
         if (!player.hasPermission("haven.command.deletespawn")) {
             sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));

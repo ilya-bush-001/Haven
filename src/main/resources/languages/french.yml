@@ -3,7 +3,7 @@ messages:
   # La plupart des messages d'utilisation
   no-permissions: "&c[✘] Vous n'avez pas la permission d'exécuter cette commande !" # Si vous n'avez pas assez de permissions
   unknown-command: "&c[✘] Commande inconnue ! Utilisez &6/hv help" # Si la commande est inconnue
-  usage: "&c[✘] Utilisation : /hv <setspawn|delspawn|reload>" # Utilisation des commandes du plugin
+  usage: "&c[✘] Utilisation : /hv <setspawn|delspawn|reload|control>" # Utilisation des commandes du plugin
   error: "&c[✘] Vous devez être un joueur pour utiliser cette commande !" # Si vous écrivez certaines commandes depuis la console, vous n'êtes pas autorisé à le faire.
 
   # Catégorie pour la commande /hv setspawn

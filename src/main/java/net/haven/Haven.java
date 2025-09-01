@@ -4,6 +4,7 @@ import net.haven.commands.SpawnCommand;
 import net.haven.config.ConfigLocalization;
 import net.haven.commands.handlers.CommandHandler;
 import net.haven.completers.HavenTabCompleter;
+import net.haven.listeners.MenuListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public final class Haven extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("hv")).setExecutor(new CommandHandler(this));
         Objects.requireNonNull(this.getCommand("hv")).setTabCompleter(new HavenTabCompleter(this));
+        getServer().getPluginManager().registerEvents(new MenuListener(), this);
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
 
         getLogger().info("Haven enabled!");

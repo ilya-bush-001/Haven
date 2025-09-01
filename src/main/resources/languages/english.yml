@@ -3,7 +3,7 @@ messages:
   # Most usage messages
   no-permissions: "&c[✘] You don't have permission to execute this command!" # If you don't have enough permissions
   unknown-command: "&c[✘] Unknown command! Use &6/hv help" # If the command is unknown
-  usage: "&c[✘] Usage: /hv <setspawn|delspawn|reload>" # Usage plugin commands
+  usage: "&c[✘] Usage: /hv <setspawn|delspawn|reload|control>" # Usage plugin commands
   error: "&c[✘] You must be a player to use this command!" # If you are writing certain commands from the console, you will not be allowed to do so.
 
   # Category for command /hv setspawn
@@ -23,6 +23,9 @@ messages:
   # Category for command /hv reload
   reload:
     success: "&a[✔] Configuration reloaded!" # If plugin reloaded
+
+  # Category for command /hv control
+  opened: "&a[✔] You opened control panel!" # If menu successfully opened
 
   # Category for command /hv help
   help:

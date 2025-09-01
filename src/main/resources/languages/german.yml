@@ -3,7 +3,7 @@ messages:
   # Die meisten Nutzungsmeldungen
   no-permissions: "&c[✘] Du hast keine Berechtigung, diesen Befehl auszuführen!" # Wenn du nicht genug Berechtigungen hast
   unknown-command: "&c[✘] Unbekannter Befehl! Verwende &6/hv help" # Wenn der Befehl unbekannt ist
-  usage: "&c[✘] Verwendung: /hv <setspawn|delspawn|reload>" # Verwendung der Plugin-Befehle
+  usage: "&c[✘] Verwendung: /hv <setspawn|delspawn|reload|control>" # Verwendung der Plugin-Befehle
   error: "&c[✘] Du musst ein Spieler sein, um diesen Befehl zu benutzen!" # Wenn du bestimmte Befehle von der Konsole aus eingibst, ist dies nicht erlaubt.
 
   # Kategorie für den Befehl /hv setspawn
