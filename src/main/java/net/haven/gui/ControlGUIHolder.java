@@ -42,17 +42,17 @@ public class ControlGUIHolder implements InventoryHolder {
     }
 
     private ItemStack createBookItem() {
-        ItemStack book = new ItemStack(Material.BOOK);
-        ItemMeta meta = book.getItemMeta();
+        ItemStack enderPearl = new ItemStack(Material.ENDER_PEARL);
+        ItemMeta meta = enderPearl.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("Test Info");
             meta.setLore(Arrays.asList(
                     "This is first lore line in Test Info",
                     "This is second lore line in Test Info"
             ));
-            book.setItemMeta(meta);
+            enderPearl.setItemMeta(meta);
         }
-        return book;
+        return enderPearl;
     }
 
     @Override

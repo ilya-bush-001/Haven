@@ -15,6 +15,7 @@ public class CommandHandler implements CommandExecutor {
     private final ReloadCommand reloadCommand;
     private final HelpCommand helpCommand;
     private final ControlCommand controlCommand;
+    private final SpawnCommand spawnCommand;
 
     public CommandHandler(Haven plugin) {
         this.plugin = plugin;
@@ -23,6 +24,7 @@ public class CommandHandler implements CommandExecutor {
         this.reloadCommand = new ReloadCommand(plugin);
         this.helpCommand = new HelpCommand(plugin);
         this.controlCommand = new ControlCommand(plugin);
+        this.spawnCommand = new SpawnCommand(plugin);
     }
 
     @Override
@@ -37,6 +39,7 @@ public class CommandHandler implements CommandExecutor {
         return switch (subCommand) {
             case "setspawn" -> setSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "delspawn" -> deleteSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
+            case "spawn" -> spawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "reload" -> reloadCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "control" -> controlCommand.onCommand(sender, cmd, label, getSubArgs(args));
             case "help" -> {
@@ -57,5 +60,9 @@ public class CommandHandler implements CommandExecutor {
         String[] subArgs = new String[args.length - 1];
         System.arraycopy(args, 1, subArgs, 0, subArgs.length);
         return subArgs;
+    }
+
+    public SpawnCommand getSpawnCommand() {
+        return spawnCommand;
     }
 }

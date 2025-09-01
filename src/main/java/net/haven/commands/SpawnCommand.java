@@ -17,6 +17,10 @@ public class SpawnCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
+    public Haven getPlugin() {
+        return plugin;
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player player)) {

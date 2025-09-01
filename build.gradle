@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'net'
-version = '1.6.0-test-v5'
+version = '1.6.0-test-v6'
 
 repositories {
     mavenCentral()

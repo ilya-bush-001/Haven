@@ -1,6 +1,5 @@
 package net.haven.completers;
 
-import net.haven.Haven;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class HavenTabCompleter implements TabCompleter {
 
-    public HavenTabCompleter(Haven haven) {
+    public HavenTabCompleter() {
     }
 
     @Override
