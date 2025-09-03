@@ -2,6 +2,7 @@ package net.haven.commands.handlers;
 
 import net.haven.Haven;
 import net.haven.commands.*;
+import net.haven.listeners.MenuListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,14 +17,16 @@ public class CommandHandler implements CommandExecutor {
     private final HelpCommand helpCommand;
     private final ControlCommand controlCommand;
     private final SpawnCommand spawnCommand;
+    private final MenuListener menuListener;
 
-    public CommandHandler(Haven plugin) {
+    public CommandHandler(Haven plugin, MenuListener menuListener) {
         this.plugin = plugin;
         this.setSpawnCommand = new SetSpawnCommand(plugin);
         this.deleteSpawnCommand = new DeleteSpawnCommand(plugin);
         this.reloadCommand = new ReloadCommand(plugin);
         this.helpCommand = new HelpCommand(plugin);
-        this.controlCommand = new ControlCommand(plugin);
+        this.menuListener = menuListener;
+        this.controlCommand = new ControlCommand(plugin, menuListener);
         this.spawnCommand = new SpawnCommand(plugin);
     }
 

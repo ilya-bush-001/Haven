@@ -1,5 +1,7 @@
 package net.haven.gui;
 
+import net.haven.listeners.MenuListener;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -13,8 +15,10 @@ import java.util.Arrays;
 public class ControlGUIHolder implements InventoryHolder {
 
     private final Inventory inventory;
+    private final MenuListener listener;
 
-    public ControlGUIHolder() {
+    public ControlGUIHolder(MenuListener listener) {
+        this.listener = listener;
         this.inventory = Bukkit.createInventory(this, 27, "Control Panel");
         setupInventory();
     }
@@ -22,12 +26,12 @@ public class ControlGUIHolder implements InventoryHolder {
     private void setupInventory() {
         ItemStack panelGlass = createPanelGlass();
 
-        for (int slot : Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)) {
+        for (int slot : Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)) {
             inventory.setItem(slot, panelGlass);
         }
 
-        inventory.setItem(11, createBookItem());
-        // inventory.setItem(13, createTestItem1);
+        inventory.setItem(11, createEnderPearlItem());
+        inventory.setItem(13, createBookItem());
         // inventory.setItem(15, createTestItem2);
     }
 
@@ -41,18 +45,28 @@ public class ControlGUIHolder implements InventoryHolder {
         return glass;
     }
 
-    private ItemStack createBookItem() {
+    private ItemStack createEnderPearlItem() {
         ItemStack enderPearl = new ItemStack(Material.ENDER_PEARL);
         ItemMeta meta = enderPearl.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName("Test Info");
+            meta.setDisplayName(ChatColor.GREEN + "Teleport to spawn");
             meta.setLore(Arrays.asList(
-                    "This is first lore line in Test Info",
-                    "This is second lore line in Test Info"
+                    ChatColor.GRAY + "Teleport you to spawn."
             ));
             enderPearl.setItemMeta(meta);
         }
         return enderPearl;
+    }
+
+    private ItemStack createBookItem() {
+        ItemStack book = new ItemStack(Material.BOOK);
+        ItemMeta meta = book.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName(ChatColor.YELLOW + "Statistics");
+            meta.setLore(listener.getServerStatsLore());
+            book.setItemMeta(meta);
+        }
+        return book;
     }
 
     @Override
@@ -60,13 +74,10 @@ public class ControlGUIHolder implements InventoryHolder {
         return this.inventory;
     }
 
-    public void setItem(int slot, ItemStack item) {
-        if (slot == 13 || slot == 15) {
-            inventory.setItem(slot, item);
+    public void updateStatsItems() {
+        ItemStack statsItem = inventory.getItem(13);
+        if (statsItem != null && statsItem.getType() == Material.BOOK) {
+            listener.updateStatsItem(statsItem);
         }
-    }
-
-    public ItemStack getItem(int slot) {
-        return inventory.getItem(slot);
     }
 }

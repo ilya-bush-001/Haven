@@ -1,6 +1,7 @@
 package net.haven.commands;
 
 import net.haven.Haven;
+import net.haven.listeners.MenuListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,9 +12,11 @@ import org.jetbrains.annotations.NotNull;
 public class ControlCommand implements CommandExecutor {
 
     private final Haven plugin;
+    private final MenuListener menuListener;
 
-    public ControlCommand(Haven plugin) {
+    public ControlCommand(Haven plugin, MenuListener menuListener) {
         this.plugin = plugin;
+        this.menuListener = menuListener;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class ControlCommand implements CommandExecutor {
             return true;
         }
 
-        ControlGUIHolder menu = new ControlGUIHolder();
+        ControlGUIHolder menu = new ControlGUIHolder(menuListener);
         player.openInventory(menu.getInventory());
         player.sendMessage(plugin.getMessage("messages.opened", "&aYou opened control panel"));
         return true;
