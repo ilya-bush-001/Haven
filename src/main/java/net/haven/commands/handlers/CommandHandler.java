@@ -26,7 +26,7 @@ public class CommandHandler implements CommandExecutor {
         this.reloadCommand = new ReloadCommand(plugin);
         this.helpCommand = new HelpCommand(plugin);
         this.menuListener = menuListener;
-        this.controlCommand = new ControlCommand(plugin, menuListener);
+        this.controlCommand = new ControlCommand(plugin, menuListener, reloadCommand);
         this.spawnCommand = new SpawnCommand(plugin);
     }
 

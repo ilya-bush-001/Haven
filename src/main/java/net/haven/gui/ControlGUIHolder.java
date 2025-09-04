@@ -1,5 +1,6 @@
 package net.haven.gui;
 
+import net.haven.commands.ReloadCommand;
 import net.haven.listeners.MenuListener;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -15,10 +16,12 @@ import java.util.Arrays;
 public class ControlGUIHolder implements InventoryHolder {
 
     private final Inventory inventory;
-    private final MenuListener listener;
+    private final MenuListener menuListener;
+    private final ReloadCommand reloadCommand;
 
-    public ControlGUIHolder(MenuListener listener) {
-        this.listener = listener;
+    public ControlGUIHolder(MenuListener listener, ReloadCommand reloadCommand) {
+        this.menuListener = listener;
+        this.reloadCommand = reloadCommand;
         this.inventory = Bukkit.createInventory(this, 27, "Control Panel");
         setupInventory();
     }
@@ -32,7 +35,7 @@ public class ControlGUIHolder implements InventoryHolder {
 
         inventory.setItem(11, createEnderPearlItem());
         inventory.setItem(13, createBookItem());
-        // inventory.setItem(15, createTestItem2);
+        inventory.setItem(15, createReloadItem());
     }
 
     private ItemStack createPanelGlass() {
@@ -63,10 +66,23 @@ public class ControlGUIHolder implements InventoryHolder {
         ItemMeta meta = book.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(ChatColor.YELLOW + "Statistics");
-            meta.setLore(listener.getServerStatsLore());
+            meta.setLore(menuListener.getServerStatsLore());
             book.setItemMeta(meta);
         }
         return book;
+    }
+
+    private ItemStack createReloadItem() {
+        ItemStack reload = new ItemStack(Material.REDSTONE);
+        ItemMeta meta = reload.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName(ChatColor.GREEN + "Reload the plugin");
+            meta.setLore(Arrays.asList(
+                    ChatColor.GRAY + "Click to reload plugin configuration"
+            ));
+            reload.setItemMeta(meta);
+        }
+        return reload;
     }
 
     @Override
@@ -77,7 +93,11 @@ public class ControlGUIHolder implements InventoryHolder {
     public void updateStatsItems() {
         ItemStack statsItem = inventory.getItem(13);
         if (statsItem != null && statsItem.getType() == Material.BOOK) {
-            listener.updateStatsItem(statsItem);
+            menuListener.updateStatsItem(statsItem);
         }
+    }
+
+    public ReloadCommand getReloadCommand() {
+        return reloadCommand;
     }
 }

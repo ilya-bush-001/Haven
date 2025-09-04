@@ -13,10 +13,12 @@ public class ControlCommand implements CommandExecutor {
 
     private final Haven plugin;
     private final MenuListener menuListener;
+    private final ReloadCommand reloadCommand;
 
-    public ControlCommand(Haven plugin, MenuListener menuListener) {
+    public ControlCommand(Haven plugin, MenuListener menuListener, ReloadCommand reloadCommand) {
         this.plugin = plugin;
         this.menuListener = menuListener;
+        this.reloadCommand = reloadCommand;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class ControlCommand implements CommandExecutor {
             return true;
         }
 
-        ControlGUIHolder menu = new ControlGUIHolder(menuListener);
+        ControlGUIHolder menu = new ControlGUIHolder(menuListener, reloadCommand);
         player.openInventory(menu.getInventory());
         player.sendMessage(plugin.getMessage("messages.opened", "&aYou opened control panel"));
         return true;

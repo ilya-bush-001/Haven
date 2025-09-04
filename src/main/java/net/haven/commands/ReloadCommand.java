@@ -16,7 +16,11 @@ public class ReloadCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+        return reload(sender);
+    }
+
+    public boolean reload(CommandSender sender) {
         if (!sender.hasPermission("haven.command.reload")) {
             sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
             return true;
@@ -33,5 +37,4 @@ public class ReloadCommand implements CommandExecutor {
             return false;
         }
     }
-
 }

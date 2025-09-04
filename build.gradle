@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'net'
-version = '1.6.0-remake-3'
+version = '1.6.0-remake-4'
 
 repositories {
     mavenCentral()

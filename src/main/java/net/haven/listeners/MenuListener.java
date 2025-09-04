@@ -1,5 +1,6 @@
 package net.haven.listeners;
 
+import net.haven.commands.ControlCommand;
 import net.haven.commands.SpawnCommand;
 import net.haven.gui.ControlGUIHolder;
 import org.bukkit.Bukkit;
@@ -40,10 +41,13 @@ public class MenuListener implements Listener {
 
         Player player = (Player) event.getWhoClicked();
         ItemStack clickedItem = event.getCurrentItem();
+        ControlGUIHolder holder = (ControlGUIHolder) event.getInventory().getHolder();
 
         if (clickedItem.getType() == Material.ENDER_PEARL) {
             player.closeInventory();
             teleportToSpawn(player);
+        } else if (event.getSlot() == 15 && clickedItem.getType() == Material.REDSTONE) {
+            holder.getReloadCommand().reload(player);
         }
     }
 
