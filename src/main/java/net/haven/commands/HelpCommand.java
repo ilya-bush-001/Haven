@@ -1,18 +1,21 @@
 package net.haven.commands;
 
+import net.haven.Haven;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import net.haven.Haven;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HelpCommand implements CommandExecutor {
 
     private final Haven plugin;
+    private static final String PERMISSION = "haven.command.help";
+    private static final List<String> DEFAULT_HELP = createDefaultHelp();
 
     public HelpCommand(Haven plugin) {
         this.plugin = plugin;
@@ -20,11 +23,12 @@ public class HelpCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
-        Player player = (Player) sender;
-
-        if (!player.hasPermission("haven.command.help")) {
-            sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
-            return true;
+        if (sender instanceof Player player) {
+            if (!player.hasPermission(PERMISSION)) {
+                sender.sendMessage(plugin.getMessage("messages.no-permissions",
+                        "&cYou don't have permission to execute this command!"));
+                return true;
+            }
         }
 
         showHelp(sender);
@@ -32,22 +36,35 @@ public class HelpCommand implements CommandExecutor {
     }
 
     public void showHelp(CommandSender sender) {
-        List<String> help = plugin.getMessageList("messages.help");
+        List<String> helpLines = getHelpLines();
 
-        if (help == null || help.isEmpty()) {
-            help = List.of(
-                    ChatColor.GOLD + "=== " + ChatColor.GREEN + "Haven Commands" + ChatColor.GOLD + " ===",
-                    ChatColor.YELLOW + "/hv setspawn" + ChatColor.GRAY + " - Set spawnpoint",
-                    ChatColor.YELLOW + "/hv delspawn" + ChatColor.GRAY + " - Delete spawnpoint",
-                    ChatColor.YELLOW + "/hv reload" + ChatColor.GRAY + " - Reload configuration",
-                    ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help",
-                    ChatColor.YELLOW + "/spawn" + ChatColor.GRAY + " - Teleport to spawn",
-                    ChatColor.GOLD + "=========================="
-            );
-        }
-
-        for (String line : help) {
+        for (String line : helpLines) {
             sender.sendMessage(line);
         }
+    }
+
+    private List<String> getHelpLines() {
+        List<String> configuredHelp = plugin.getMessageList("messages.help");
+
+        if (configuredHelp == null || configuredHelp.isEmpty()) {
+            return DEFAULT_HELP;
+        }
+
+        return configuredHelp;
+    }
+
+    private static List<String> createDefaultHelp() {
+        List<String> help = new ArrayList<>();
+
+        help.add(ChatColor.GOLD + "=== " + ChatColor.GREEN + "Haven Commands" + ChatColor.GOLD + " ===");
+        help.add(ChatColor.YELLOW + "/hv setspawn" + ChatColor.GRAY + " - Set spawnpoint");
+        help.add(ChatColor.YELLOW + "/hv delspawn" + ChatColor.GRAY + " - Delete spawnpoint");
+        help.add(ChatColor.YELLOW + "/hv reload" + ChatColor.GRAY + " - Reload configuration");
+        help.add(ChatColor.YELLOW + "/hv help" + ChatColor.GRAY + " - Show this help");
+        help.add(ChatColor.YELLOW + "/hv control" + ChatColor.GRAY + " - Open control panel");
+        help.add(ChatColor.YELLOW + "/spawn" + ChatColor.GRAY + " - Teleport to spawn");
+        help.add(ChatColor.GOLD + "==========================");
+
+        return help;
     }
 }

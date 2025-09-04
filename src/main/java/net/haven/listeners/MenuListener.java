@@ -1,6 +1,5 @@
 package net.haven.listeners;
 
-import net.haven.commands.ControlCommand;
 import net.haven.commands.SpawnCommand;
 import net.haven.gui.ControlGUIHolder;
 import org.bukkit.Bukkit;
@@ -21,6 +20,12 @@ import java.util.List;
 
 public class MenuListener implements Listener {
 
+    private static final Material TELEPORT_MATERIAL = Material.ENDER_PEARL;
+    private static final Material RELOAD_MATERIAL = Material.REDSTONE;
+
+    private static final double EXCELLENT_TPS = 18.0;
+    private static final double GOOD_TPS = 15.0;
+
     private final SpawnCommand spawnCommand;
 
     public MenuListener(SpawnCommand spawnCommand) {
@@ -29,36 +34,73 @@ public class MenuListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getInventory().getHolder() instanceof ControlGUIHolder)) {
+        if (!isControlPanelInventory(event)) {
             return;
         }
 
         event.setCancelled(true);
 
-        if (event.getCurrentItem() == null) {
+        ItemStack clickedItem = event.getCurrentItem();
+        if (clickedItem == null) {
             return;
         }
 
         Player player = (Player) event.getWhoClicked();
-        ItemStack clickedItem = event.getCurrentItem();
         ControlGUIHolder holder = (ControlGUIHolder) event.getInventory().getHolder();
 
-        if (clickedItem.getType() == Material.ENDER_PEARL) {
-            player.closeInventory();
-            teleportToSpawn(player);
-        } else if (event.getSlot() == 15 && clickedItem.getType() == Material.REDSTONE) {
+        handleItemClick(player, clickedItem, holder, event.getSlot());
+    }
+
+    private boolean isControlPanelInventory(InventoryClickEvent event) {
+        return event.getInventory().getHolder() instanceof ControlGUIHolder;
+    }
+
+    private void handleItemClick(Player player, ItemStack clickedItem, ControlGUIHolder holder, int slot) {
+        Material itemType = clickedItem.getType();
+
+        if (itemType == TELEPORT_MATERIAL && slot == holder.getTeleportSlot()) {
+            handleTeleportClick(player);
+        } else if (itemType == RELOAD_MATERIAL && slot == holder.getReloadSlot()) {
+            handleReloadClick(player, holder);
+        }
+    }
+
+    private void handleTeleportClick(Player player) {
+        player.closeInventory();
+        teleportToSpawn(player);
+    }
+
+    private void handleReloadClick(Player player, ControlGUIHolder holder) {
+        if (player.hasPermission("haven.command.reload")) {
             holder.getReloadCommand().reload(player);
+        } else {
+            player.sendMessage(ChatColor.RED + "You don't have permission to reload the configuration!");
         }
     }
 
     private void teleportToSpawn(Player player) {
-        String worldName = spawnCommand.getPlugin().getConfig().getString("spawn.world");
-        if (worldName == null) {
-            player.sendMessage(spawnCommand.getPlugin().getMessage("messages.spawn.not-set", "&cSpawn not set!"));
+        Location spawnLocation = getSpawnLocation();
+
+        if (spawnLocation == null) {
+            sendSpawnNotSetMessage(player);
             return;
         }
 
-        Location spawnLocation = new Location(
+        if (!player.hasPermission("haven.command.spawn")) {
+            player.sendMessage(ChatColor.RED + "You don't have permission to teleport to spawn!");
+            return;
+        }
+
+        performSafeTeleport(player, spawnLocation);
+    }
+
+    private Location getSpawnLocation() {
+        String worldName = spawnCommand.getPlugin().getConfig().getString("spawn.world");
+        if (worldName == null) {
+            return null;
+        }
+
+        return new Location(
                 Bukkit.getWorld(worldName),
                 spawnCommand.getPlugin().getConfig().getDouble("spawn.x"),
                 spawnCommand.getPlugin().getConfig().getDouble("spawn.y"),
@@ -66,32 +108,59 @@ public class MenuListener implements Listener {
                 (float) spawnCommand.getPlugin().getConfig().getDouble("spawn.yaw"),
                 (float) spawnCommand.getPlugin().getConfig().getDouble("spawn.pitch")
         );
+    }
 
-        player.teleport(spawnLocation);
-        player.sendMessage(spawnCommand.getPlugin().getMessage("messages.spawn.success", "&aTeleported to spawn!"));
+    private void sendSpawnNotSetMessage(Player player) {
+        player.sendMessage(spawnCommand.getPlugin().getMessage("messages.spawn.not-set",
+                "&cSpawn point is not set!"));
+    }
+
+    private void performSafeTeleport(Player player, Location spawnLocation) {
+        try {
+            player.teleport(spawnLocation);
+            player.sendMessage(spawnCommand.getPlugin().getMessage("messages.spawn.success",
+                    "&aTeleported to spawn!"));
+        } catch (Exception e) {
+            player.sendMessage(ChatColor.RED + "Failed to teleport to spawn!");
+            spawnCommand.getPlugin().getLogger().warning("Teleport failed for " + player.getName() + ": " + e.getMessage());
+        }
     }
 
     public List<String> getServerStatsLore() {
         List<String> lore = new ArrayList<>();
 
+        addTpsInfo(lore);
+        addMemoryInfo(lore);
+        addPlayerInfo(lore);
+        addUptimeInfo(lore);
+
+        return lore;
+    }
+
+    private void addTpsInfo(List<String> lore) {
         double[] tps = Bukkit.getTPS();
         lore.add(ChatColor.GOLD + "TPS: " + getFormattedTPS(tps));
+    }
 
+    private void addMemoryInfo(List<String> lore) {
         Runtime runtime = Runtime.getRuntime();
         long maxMemory = runtime.maxMemory() / 1024 / 1024;
         long allocatedMemory = runtime.totalMemory() / 1024 / 1024;
         long freeMemory = runtime.freeMemory() / 1024 / 1024;
         long usedMemory = allocatedMemory - freeMemory;
+        int usagePercentage = (int) ((usedMemory * 100) / maxMemory);
 
         lore.add(ChatColor.GREEN + "RAM: " + ChatColor.WHITE + usedMemory + "MB/" + maxMemory + "MB");
-        lore.add(ChatColor.GREEN + "Used: " + ChatColor.WHITE + (usedMemory * 100 / maxMemory) + "%");
+        lore.add(ChatColor.GREEN + "Used: " + ChatColor.WHITE + usagePercentage + "%");
+    }
 
-        lore.add(ChatColor.BLUE + "Players online: " + ChatColor.WHITE + Bukkit.getOnlinePlayers().size());
+    private void addPlayerInfo(List<String> lore) {
+        lore.add(ChatColor.BLUE + "Players: " + ChatColor.WHITE + Bukkit.getOnlinePlayers().size());
+    }
 
+    private void addUptimeInfo(List<String> lore) {
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime() / 1000;
         lore.add(ChatColor.AQUA + "Uptime: " + ChatColor.WHITE + formatUptime(uptime));
-
-        return lore;
     }
 
     public String getFormattedTPS(double[] tps) {
@@ -108,8 +177,8 @@ public class MenuListener implements Listener {
     }
 
     public ChatColor getTPSColor(double tps) {
-        if (tps >= 18.0) return ChatColor.GREEN;
-        if (tps >= 15.0) return ChatColor.YELLOW;
+        if (tps >= EXCELLENT_TPS) return ChatColor.GREEN;
+        if (tps >= GOOD_TPS) return ChatColor.YELLOW;
         return ChatColor.RED;
     }
 
@@ -119,20 +188,24 @@ public class MenuListener implements Listener {
         long minutes = (seconds % 3600) / 60;
 
         if (days > 0) {
-            return days + "d " + hours + "h " + minutes + "min";
+            return days + "d " + hours + "h " + minutes + "m";
         } else if (hours > 0) {
-            return hours + "h " + minutes + "min";
+            return hours + "h " + minutes + "m";
         } else {
-            return minutes + "min";
+            return minutes + "m";
         }
     }
 
     public void updateStatsItem(ItemStack item) {
-        if (item == null || !item.hasItemMeta()) return;
+        if (item == null || !item.hasItemMeta()) {
+            return;
+        }
 
         ItemMeta meta = item.getItemMeta();
-        meta.setLore(getServerStatsLore());
-        item.setItemMeta(meta);
+        if (meta != null) {
+            meta.setLore(getServerStatsLore());
+            item.setItemMeta(meta);
+        }
     }
 
     @EventHandler
@@ -142,4 +215,7 @@ public class MenuListener implements Listener {
         }
     }
 
+    public SpawnCommand getSpawnCommand() {
+        return spawnCommand;
+    }
 }

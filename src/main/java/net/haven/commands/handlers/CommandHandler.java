@@ -21,30 +21,34 @@ public class CommandHandler implements CommandExecutor {
 
     public CommandHandler(Haven plugin, MenuListener menuListener) {
         this.plugin = plugin;
+        this.menuListener = menuListener;
+
         this.setSpawnCommand = new SetSpawnCommand(plugin);
         this.deleteSpawnCommand = new DeleteSpawnCommand(plugin);
         this.reloadCommand = new ReloadCommand(plugin);
         this.helpCommand = new HelpCommand(plugin);
-        this.menuListener = menuListener;
-        this.controlCommand = new ControlCommand(plugin, menuListener, reloadCommand);
         this.spawnCommand = new SpawnCommand(plugin);
+        this.controlCommand = new ControlCommand(plugin, menuListener, reloadCommand);
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd,
+                             @NotNull String label, String[] args) {
+
         if (args.length == 0) {
             helpCommand.showHelp(sender);
             return true;
         }
 
         String subCommand = args[0].toLowerCase();
+        String[] subArgs = getSubArgs(args);
 
         return switch (subCommand) {
-            case "setspawn" -> setSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "delspawn" -> deleteSpawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "spawn" -> spawnCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "reload" -> reloadCommand.onCommand(sender, cmd, label, getSubArgs(args));
-            case "control" -> controlCommand.onCommand(sender, cmd, label, getSubArgs(args));
+            case "setspawn" -> setSpawnCommand.onCommand(sender, cmd, label, subArgs);
+            case "delspawn" -> deleteSpawnCommand.onCommand(sender, cmd, label, subArgs);
+            case "spawn" -> spawnCommand.onCommand(sender, cmd, label, subArgs);
+            case "reload" -> reloadCommand.onCommand(sender, cmd, label, subArgs);
+            case "control" -> controlCommand.onCommand(sender, cmd, label, subArgs);
             case "help" -> {
                 helpCommand.showHelp(sender);
                 yield true;
@@ -60,6 +64,7 @@ public class CommandHandler implements CommandExecutor {
         if (args.length <= 1) {
             return new String[0];
         }
+
         String[] subArgs = new String[args.length - 1];
         System.arraycopy(args, 1, subArgs, 0, subArgs.length);
         return subArgs;

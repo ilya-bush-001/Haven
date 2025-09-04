@@ -9,17 +9,52 @@ import net.haven.listeners.MenuListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
 
 public final class Haven extends JavaPlugin {
+
+    private static final String PLUGIN_NAME = "Haven";
+    private static final String MAIN_COMMAND = "hv";
+    private static final String SPAWN_COMMAND = "spawn";
+
+    private static final long STATS_UPDATE_DELAY = 20L;
+    private static final long STATS_UPDATE_PERIOD = 20L;
+
     private ConfigLocalization localization;
     private CommandHandler commandHandler;
     private MenuListener menuListener;
+    private BukkitTask statsUpdateTask;
 
     @Override
     public void onEnable() {
+        try {
+            initializePlugin();
+            registerCommands();
+            registerListeners();
+            startBackgroundTasks();
+
+            getLogger().info(PLUGIN_NAME + " has been enabled successfully!");
+
+        } catch (Exception e) {
+            handleEnableError(e);
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        try {
+            stopBackgroundTasks();
+            getLogger().info(PLUGIN_NAME + " has been disabled.");
+
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "Error during plugin disable: ", e);
+        }
+    }
+
+    private void initializePlugin() {
         saveDefaultConfig();
         reloadConfig();
 
@@ -29,32 +64,77 @@ public final class Haven extends JavaPlugin {
         SpawnCommand spawnCommand = new SpawnCommand(this);
         this.menuListener = new MenuListener(spawnCommand);
         this.commandHandler = new CommandHandler(this, menuListener);
+    }
 
-        Objects.requireNonNull(this.getCommand("hv")).setTabCompleter(new HavenTabCompleter());
-        Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
+    private void registerCommands() {
+        Objects.requireNonNull(getCommand(MAIN_COMMAND)).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand(MAIN_COMMAND)).setTabCompleter(new HavenTabCompleter());
 
+        Objects.requireNonNull(getCommand(SPAWN_COMMAND)).setExecutor(new SpawnCommand(this));
+    }
+
+    private void registerListeners() {
         getServer().getPluginManager().registerEvents(menuListener, this);
+    }
 
-        this.getCommand("hv").setExecutor(commandHandler);
-        this.getCommand("hv").setTabCompleter(new HavenTabCompleter());
+    private void startBackgroundTasks() {
+        startStatsUpdateTask();
+    }
 
-        Bukkit.getScheduler().runTaskTimer(this, () -> {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (player.getOpenInventory().getTopInventory().getHolder() instanceof ControlGUIHolder) {
-                    ControlGUIHolder holder = (ControlGUIHolder) player.getOpenInventory().getTopInventory().getHolder();
-                    holder.updateStatsItems();
-                }
+    private void startStatsUpdateTask() {
+        statsUpdateTask = Bukkit.getScheduler().runTaskTimer(this, this::updateControlPanelStats,
+                STATS_UPDATE_DELAY, STATS_UPDATE_PERIOD);
+
+        getLogger().info("Started control panel stats update task");
+    }
+
+    private void updateControlPanelStats() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (isViewingControlPanel(player)) {
+                updatePlayerControlPanel(player);
             }
-        }, 20L, 20L);
+        }
+    }
 
-        getLogger().info("Haven enabled!");
+    private boolean isViewingControlPanel(Player player) {
+        return player.getOpenInventory().getTopInventory().getHolder() instanceof ControlGUIHolder;
+    }
+
+    private void updatePlayerControlPanel(Player player) {
+        try {
+            ControlGUIHolder holder = (ControlGUIHolder) player.getOpenInventory().getTopInventory().getHolder();
+            holder.updateStatsItems();
+        } catch (Exception e) {
+            getLogger().warning("Failed to update control panel for player: " + player.getName());
+            getLogger().warning("Error: " + e.getMessage());
+        }
+    }
+
+    private void stopBackgroundTasks() {
+        if (statsUpdateTask != null) {
+            statsUpdateTask.cancel();
+            statsUpdateTask = null;
+            getLogger().info("Stopped control panel stats update task");
+        }
+    }
+
+    private void handleEnableError(Exception e) {
+        getLogger().log(Level.SEVERE, "Failed to enable " + PLUGIN_NAME + "!", e);
+        getLogger().severe("The plugin will not function properly.");
+
+        // Disable the plugin to prevent further issues
+        getServer().getPluginManager().disablePlugin(this);
     }
 
     public String getMessage(String path, Object... replacements) {
         String message = localization.getMessage(path);
 
-        for (int i = 0; i < replacements.length; i++) {
-            message = message.replace("{" + i + "}", String.valueOf(replacements[i]));
+        // Apply replacements if provided
+        if (replacements != null && replacements.length > 0) {
+            for (int i = 0; i < replacements.length; i++) {
+                String replacement = String.valueOf(replacements[i]);
+                message = message.replace("{" + i + "}", replacement);
+            }
         }
 
         return message;
@@ -64,8 +144,32 @@ public final class Haven extends JavaPlugin {
         return localization;
     }
 
-    public List<String> getMessageList(String path) {
+    public java.util.List<String> getMessageList(String path) {
         return localization.getMessageList(path);
     }
 
+    public CommandHandler getCommandHandler() {
+        return commandHandler;
+    }
+
+    public MenuListener getMenuListener() {
+        return menuListener;
+    }
+
+    public BukkitTask getStatsUpdateTask() {
+        return statsUpdateTask;
+    }
+
+    public boolean reloadPlugin() {
+        try {
+            reloadConfig();
+            localization.reload();
+            getLogger().info("Plugin configuration reloaded successfully");
+            return true;
+
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "Failed to reload plugin configuration: ", e);
+            return false;
+        }
+    }
 }
