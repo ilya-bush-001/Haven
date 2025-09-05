@@ -122,14 +122,12 @@ public final class Haven extends JavaPlugin {
         getLogger().log(Level.SEVERE, "Failed to enable " + PLUGIN_NAME + "!", e);
         getLogger().severe("The plugin will not function properly.");
 
-        // Disable the plugin to prevent further issues
         getServer().getPluginManager().disablePlugin(this);
     }
 
     public String getMessage(String path, Object... replacements) {
         String message = localization.getMessage(path);
-
-        // Apply replacements if provided
+        
         if (replacements != null && replacements.length > 0) {
             for (int i = 0; i < replacements.length; i++) {
                 String replacement = String.valueOf(replacements[i]);

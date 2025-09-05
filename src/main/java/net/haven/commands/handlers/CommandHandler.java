@@ -32,8 +32,7 @@ public class CommandHandler implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd,
-                             @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
 
         if (args.length == 0) {
             helpCommand.showHelp(sender);

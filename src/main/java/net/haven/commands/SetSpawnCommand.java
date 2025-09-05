@@ -45,8 +45,7 @@ public class SetSpawnCommand implements CommandExecutor {
     }
 
     private void sendNoPermissionMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.no-permissions",
-                "&cYou don't have permission to execute this command!"));
+        sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
     }
 
     private boolean setSpawnLocation(Player player, CommandSender sender) {

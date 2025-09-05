@@ -91,12 +91,10 @@ public class HavenTabCompleter implements TabCompleter {
     }
 
     private List<String> handleSetSpawnArgs(String[] args) {
-        // setspawn doesn't typically have additional arguments
         return new ArrayList<>();
     }
 
     private List<String> handleDelSpawnArgs(String[] args) {
-        // delspawn doesn't typically have additional arguments
         return new ArrayList<>();
     }
 

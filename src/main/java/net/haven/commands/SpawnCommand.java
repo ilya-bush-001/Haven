@@ -51,8 +51,7 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendNoPermissionMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.no-permissions",
-                "&cYou don't have permission to execute this command!"));
+        sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
     }
 
     private boolean teleportToSpawn(Player player, CommandSender sender) {
@@ -95,8 +94,7 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendInvalidSpawnMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.error",
-                "&cConfigured spawn point is invalid! Please set a new spawn."));
+        sender.sendMessage(plugin.getMessage("messages.error", "&cConfigured spawn point is invalid! Please set a new spawn."));
     }
 
     private boolean performTeleport(Player player, CommandSender sender, Location spawnLocation) {
@@ -116,8 +114,7 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void handleTeleportError(CommandSender sender, Exception e) {
-        sender.sendMessage(plugin.getMessage("messages.error",
-                "&cFailed to teleport to spawn! Check console for details."));
+        sender.sendMessage(plugin.getMessage("messages.error", "&cFailed to teleport to spawn! Check console for details."));
 
         plugin.getLogger().severe("Teleport failed: " + e.getMessage());
         e.printStackTrace();

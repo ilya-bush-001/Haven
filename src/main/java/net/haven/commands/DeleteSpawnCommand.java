@@ -26,14 +26,12 @@ public class DeleteSpawnCommand implements CommandExecutor {
         }
 
         if (!player.hasPermission(PERMISSION)) {
-            sender.sendMessage(plugin.getMessage("messages.no-permissions",
-                    "&cYou don't have permission to execute this command!"));
+            sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
             return true;
         }
 
         if (!isSpawnPointSet()) {
-            sender.sendMessage(plugin.getMessage("messages.delspawn.not-set",
-                    "&cSpawn point is not set!"));
+            sender.sendMessage(plugin.getMessage("messages.delspawn.not-set", "&cSpawn point is not set!"));
             return true;
         }
 

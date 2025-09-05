@@ -34,7 +34,6 @@ public class ControlCommand implements CommandExecutor {
             return true;
         }
 
-        // Create and open the control panel GUI
         try {
             ControlGUIHolder controlMenu = new ControlGUIHolder(menuListener, reloadCommand);
             player.openInventory(controlMenu.getInventory());
