@@ -8,9 +8,7 @@ website: https://www.youtube.com/@IlyaBush-001
 commands:
   hv:
     description: All commands allowed
-    usage: /hv <subcommand>
     permission: haven.*
   spawn:
     description: Teleport to spawn
-    usage: /spawn
     permission: haven.command.spawn

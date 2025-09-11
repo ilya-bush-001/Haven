@@ -6,6 +6,8 @@ import net.haven.commands.handlers.CommandHandler;
 import net.haven.completers.HavenTabCompleter;
 import net.haven.gui.ControlGUIHolder;
 import net.haven.listeners.MenuListener;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.ComponentLike;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +16,11 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.Objects;
 import java.util.logging.Level;
 
+import org.jetbrains.annotations.NotNull;
+
 public final class Haven extends JavaPlugin {
+
+    private BukkitAudiences audiences;
 
     private static final String PLUGIN_NAME = "Haven";
     private static final String MAIN_COMMAND = "hv";
@@ -30,6 +36,9 @@ public final class Haven extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        this.audiences = BukkitAudiences.create(this);
+
         try {
             initializePlugin();
             registerCommands();
@@ -61,16 +70,16 @@ public final class Haven extends JavaPlugin {
         localization = new ConfigLocalization(this);
         localization.loadLanguages();
 
-        SpawnCommand spawnCommand = new SpawnCommand(this);
+        SpawnCommand spawnCommand = new SpawnCommand(this, audiences);
         this.menuListener = new MenuListener(spawnCommand);
-        this.commandHandler = new CommandHandler(this, menuListener);
+        this.commandHandler = new CommandHandler(this, menuListener, audiences);
     }
 
     private void registerCommands() {
         Objects.requireNonNull(getCommand(MAIN_COMMAND)).setExecutor(commandHandler);
         Objects.requireNonNull(getCommand(MAIN_COMMAND)).setTabCompleter(new HavenTabCompleter());
 
-        Objects.requireNonNull(getCommand(SPAWN_COMMAND)).setExecutor(new SpawnCommand(this));
+        Objects.requireNonNull(getCommand(SPAWN_COMMAND)).setExecutor(new SpawnCommand(this, audiences));
     }
 
     private void registerListeners() {
@@ -125,9 +134,9 @@ public final class Haven extends JavaPlugin {
         getServer().getPluginManager().disablePlugin(this);
     }
 
-    public String getMessage(String path, Object... replacements) {
+    public @NotNull String getMessage(String path, Object... replacements) {
         String message = localization.getMessage(path);
-        
+
         if (replacements != null && replacements.length > 0) {
             for (int i = 0; i < replacements.length; i++) {
                 String replacement = String.valueOf(replacements[i]);

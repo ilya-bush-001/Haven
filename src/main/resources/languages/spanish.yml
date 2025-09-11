@@ -1,35 +1,38 @@
 messages:
 
-  # La mayoría de los mensajes de uso
-  no-permissions: "&c[✘] ¡No tienes permiso para ejecutar este comando!" # Si no tienes permisos suficientes
-  unknown-command: "&c[✘] ¡Comando desconocido! Usa &6/hv help" # Si el comando es desconocido
-  usage: "&c[✘] Uso: /hv <setspawn|delspawn|reload|control>" # Uso de los comandos del plugin
-  error: "&c[✘] ¡Debes ser un jugador para usar este comando!" # Si lo intentas desde la consola
+  # Mensajes generales
+  no-permissions: "<color:#F2000E>[✘] ¡No tienes permiso para ejecutar este comando!" # Se muestra si el usuario no tiene los permisos necesarios
+  unknown-command: "<color:#F2000E>[✘] ¡Comando desconocido! Usa </color><gradient:#F27200:#F29900>/hv help</gradient>" # Se muestra si el comando no existe
+  usage: "<color:#F2000E>[✘] Uso: /hv <setspawn|delspawn|reload|control>" # Sintaxis de los comandos del plugin
+  not-player: "<color:#F2000E>[✘] ¡Debes ser un jugador para usar este comando!" # Se muestra si el comando se ejecuta desde la consola
+  error: "<color:#F2000E>Ha ocurrido un error, por favor revisa los registros y contacta a los desarrolladores para obtener ayuda." # Mensaje de error genérico
 
   # Categoría para el comando /hv setspawn
   setspawn:
-    success: "&a[✔] ¡Punto de spawn establecido con éxito!" # Si el spawn fue definido
+    success: "<color:#38F200>[✔] ¡Punto de aparición establecido con éxito!" # Se muestra si el spawn se estableció correctamente
+    error: "<color:#F2000E>¡Error al establecer el punto de aparición! Revisa la consola para más detalles." # Se muestra si ocurre un error al establecer el spawn
 
   # Categoría para el comando /hv spawn
   spawn:
-    success: "&aTeletransportado al spawn!" # Si el jugador fue teletransportado
-    not-set: "&c[✘] ¡El spawn no está definido!" # Si no está configurado
+    success: "<color:#38F200>¡Teletransportado al punto de aparición!" # Se muestra si la teletransportación al spawn fue exitosa
+    not-set: "<color:#F2000E>[✘] ¡El punto de aparición no está establecido!" # Se muestra si no se ha establecido ningún spawn
+    error: "<color:#F2000E>Ha ocurrido un error, por favor revisa los registros y contacta a los desarrolladores para obtener ayuda." # Mensaje de error durante la teletransportación
 
   # Categoría para el comando /hv delspawn
   delspawn:
-    success: "&a[✔] Spawn &celiminado&a!" # Si el spawn fue eliminado
-    not-set: "&c[✘] ¡El spawn no estaba definido!" # Si no existía
+    success: "<color:#38F200>[✔] Spawn</color> <color:#F2000E>eliminado</color><color:#38F200>!</color>" # Se muestra si el punto de spawn fue eliminado
+    not-set: "<color:#F2000E>[✘] ¡El punto de aparición no estaba establecido!" # Se muestra si intentas eliminar un spawn inexistente
 
   # Categoría para el comando /hv reload
   reload:
-    success: "&a[✔] ¡Configuración recargada!" # Si el plugin fue recargado
+    success: "<color:#38F200>[✔] ¡Configuración recargada!" # Se muestra si la configuración del plugin se recargó con éxito
 
   # Categoría para el comando /hv help
   help:
-    - "&e============== &6Ayuda Haven &e==============="
-    - "/hv setspawn - &edefinir punto de spawn;"
-    - "/hv delspawn - &eeliminar punto de spawn;"
-    - "/hv reload - &erecargar configuración del plugin;"
-    - "/hv help - &emostrar esta ayuda;"
-    - "/spawn - &eteletransportar al spawn."
-    - "&e========================================="
+    - "<gradient:#D70000:#FF5D2D>============== AYUDA DE ʜᴀᴠᴇɴ ============== </gradient>" # Título del menú de ayuda
+    - "/ʜᴠ sᴇᴛsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>establecer punto de aparición</gradient><white>;</white>" # Establece el spawn
+    - "/ʜᴠ ᴅᴇʟsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>eliminar punto de aparición</gradient><white>;</white>" # Elimina el spawn
+    - "/ʜᴠ ʀᴇʟᴏᴀᴅ - <gradient:#D70000:#FF5D2D>recargar configuración del plugin</gradient><white>;</white>" # Recarga la configuración
+    - "/ʜᴠ ʜᴇʟᴘ - <gradient:#D70000:#FF5D2D>mostrar esta ayuda</gradient><white>;</white>" # Muestra esta ayuda
+    - "/sᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>teletransportarse al punto de aparición</gradient><white>.</white>" # Teletransporta al spawn
+    - "<gradient:#D70000:#FF5D2D>=========================================</gradient>" # Pie del menú de ayuda

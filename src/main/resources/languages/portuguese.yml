@@ -1,35 +1,38 @@
 messages:
 
-  # A maioria das mensagens de uso
-  no-permissions: "&c[✘] Você não tem permissão para executar este comando!" # Se não tiver permissões suficientes
-  unknown-command: "&c[✘] Comando desconhecido! Use &6/hv help" # Se o comando for desconhecido
-  usage: "&c[✘] Uso: /hv <setspawn|delspawn|reload|control>" # Uso dos comandos do plugin
-  error: "&c[✘] Você deve ser um jogador para usar este comando!" # Se tentar usar pela console
+  # Mensagens gerais
+  no-permissions: "<color:#F2000E>[✘] Você não tem permissão para executar este comando!" # Exibido se o usuário não tiver as permissões necessárias
+  unknown-command: "<color:#F2000E>[✘] Comando desconhecido! Use </color><gradient:#F27200:#F29900>/hv help</gradient>" # Exibido se o comando não existir
+  usage: "<color:#F2000E>[✘] Uso: /hv <setspawn|delspawn|reload|control>" # Sintaxe dos comandos do plugin
+  not-player: "<color:#F2000E>[✘] Você precisa ser um jogador para usar este comando!" # Exibido se o comando for executado pelo console
+  error: "<color:#F2000E>Ocorreu um erro, por favor, verifique os logs e contate os desenvolvedores para obter ajuda." # Mensagem de erro genérica
 
   # Categoria para o comando /hv setspawn
   setspawn:
-    success: "&a[✔] Ponto de spawn definido com sucesso!" # Se o spawn foi definido
+    success: "<color:#38F200>[✔] Ponto de spawn definido com sucesso!" # Exibido se o spawn foi definido corretamente
+    error: "<color:#F2000E>Falha ao definir o ponto de spawn! Verifique o console para mais detalhes." # Exibido em caso de erro ao definir o spawn
 
   # Categoria para o comando /hv spawn
   spawn:
-    success: "&aTeleportado para o spawn!" # Se o jogador foi teleportado
-    not-set: "&c[✘] Spawn não definido!" # Se o spawn não foi configurado
+    success: "<color:#38F200>Teleportado para o spawn!" # Exibido se a teleportação para o spawn for bem-sucedida
+    not-set: "<color:#F2000E>[✘] O spawn não está definido!" # Exibido se nenhum spawn foi definido
+    error: "<color:#F2000E>Ocorreu um erro, por favor, verifique os logs e contate os desenvolvedores para obter ajuda." # Mensagem de erro durante a teleportação
 
   # Categoria para o comando /hv delspawn
   delspawn:
-    success: "&a[✔] Spawn &cremovido&a!" # Se o spawn foi removido
-    not-set: "&c[✘] O spawn não estava definido!" # Se não foi configurado
+    success: "<color:#38F200>[✔] Spawn</color> <color:#F2000E>excluído</color><color:#38F200>!</color>" # Exibido se o ponto de spawn foi excluído
+    not-set: "<color:#F2000E>[✘] O ponto de spawn não estava definido!" # Exibido se tentar excluir um spawn inexistente
 
   # Categoria para o comando /hv reload
   reload:
-    success: "&a[✔] Configuração recarregada!" # Se o plugin foi recarregado
+    success: "<color:#38F200>[✔] Configuração recarregada!" # Exibido se a configuração do plugin foi recarregada com sucesso
 
   # Categoria para o comando /hv help
   help:
-    - "&e============== &6Ajuda Haven &e==============="
-    - "/hv setspawn - &edefinir ponto de spawn;"
-    - "/hv delspawn - &eremover ponto de spawn;"
-    - "/hv reload - &erecarregar configuração do plugin;"
-    - "/hv help - &emostrar esta ajuda;"
-    - "/spawn - &eteleportar para o spawn."
-    - "&e========================================="
+    - "<gradient:#D70000:#FF5D2D>============== AJUDA ʜᴀᴠᴇɴ ============== </gradient>" # Título do menu de ajuda
+    - "/ʜᴠ sᴇᴛsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>definir ponto de spawn</gradient><white>;</white>" # Define o spawn
+    - "/ʜᴠ ᴅᴇʟsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>excluir ponto de spawn</gradient><white>;</white>" # Exclui o spawn
+    - "/ʜᴠ ʀᴇʟᴏᴀᴅ - <gradient:#D70000:#FF5D2D>recarregar configuração do plugin</gradient><white>;</white>" # Recarrega a configuração
+    - "/ʜᴠ ʜᴇʟᴘ - <gradient:#D70000:#FF5D2D>mostrar esta ajuda</gradient><white>;</white>" # Mostra esta ajuda
+    - "/sᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>teleportar para o ponto de spawn</gradient><white>.</white>" # Teleporta para o spawn
+    - "<gradient:#D70000:#FF5D2D>=========================================</gradient>" # Rodapé do menu de ajuda

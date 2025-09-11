@@ -1,35 +1,38 @@
 messages:
 
-  # Większość komunikatów użycia
-  no-permissions: "&c[✘] Nie masz uprawnień do wykonania tej komendy!" # Jeśli nie masz wystarczających uprawnień
-  unknown-command: "&c[✘] Nieznana komenda! Użyj &6/hv help" # Jeśli komenda jest nieznana
-  usage: "&c[✘] Użycie: /hv <setspawn|delspawn|reload|control>" # Użycie komend pluginu
-  error: "&c[✘] Musisz być graczem, aby użyć tej komendy!" # Jeśli wpisujesz komendę z konsoli, nie możesz tego zrobić
+  # Ogólne komunikaty
+  no-permissions: "<color:#F2000E>[✘] Nie masz uprawnień do wykonania tej komendy!" # Wyświetlane, gdy użytkownik nie ma wymaganych uprawnień
+  unknown-command: "<color:#F2000E>[✘] Nieznana komenda! Użyj </color><gradient:#F27200:#F29900>/hv help</gradient>" # Wyświetlane, gdy komenda nie istnieje
+  usage: "<color:#F2000E>[✘] Użycie: /hv <setspawn|delspawn|reload|control>" # Składnia komend pluginu
+  not-player: "<color:#F2000E>[✘] Musisz być graczem, aby użyć tej komendy!" # Wyświetlane, gdy komenda jest wykonywana z konsoli
+  error: "<color:#F2000E>Wystąpił błąd, sprawdź logi i skontaktuj się z developerami po pomoc." # Ogólny komunikat o błędzie
 
   # Kategoria dla komendy /hv setspawn
   setspawn:
-    success: "&a[✔] Punkt spawnu został pomyślnie ustawiony!" # Jeśli spawn został ustawiony
+    success: "<color:#38F200>[✔] Punkt spawnu został pomyślnie ustawiony!" # Wyświetlane, gdy spawn został pomyślnie ustawiony
+    error: "<color:#F2000E>Nie udało się ustawić punktu spawnu! Sprawdź konsolę, aby uzyskać szczegóły." # Wyświetlane przy błędzie podczas ustawiania spawnu
 
   # Kategoria dla komendy /hv spawn
   spawn:
-    success: "&aTeleportowano na spawn!" # Jeśli gracz został teleportowany
-    not-set: "&c[✘] Spawn nie został ustawiony!" # Jeśli spawn nie jest ustawiony
+    success: "<color:#38F200>Przeteleportowano do spawnu!" # Wyświetlane, gdy teleportacja do spawnu się powiodła
+    not-set: "<color:#F2000E>[✘] Spawn nie jest ustawiony!" # Wyświetlane, gdy nie ustawiono spawnu
+    error: "<color:#F2000E>Wystąpił błąd, sprawdź logi i skontaktuj się z developerami po pomoc." # Komunikat o błędzie podczas teleportacji
 
   # Kategoria dla komendy /hv delspawn
   delspawn:
-    success: "&a[✔] Spawn &cusunięty&a!" # Jeśli spawn został usunięty
-    not-set: "&c[✘] Spawn nie był ustawiony!" # Jeśli spawn nie został ustawiony
+    success: "<color:#38F200>[✔] Spawn</color> <color:#F2000E>usunięty</color><color:#38F200>!</color>" # Wyświetlane, gdy punkt spawnu został usunięty
+    not-set: "<color:#F2000E>[✘] Punkt spawnu nie był ustawiony!" # Wyświetlane, gdy próbujesz usunąć nieistniejący spawn
 
   # Kategoria dla komendy /hv reload
   reload:
-    success: "&a[✔] Konfiguracja przeładowana!" # Jeśli plugin został przeładowany
+    success: "<color:#38F200>[✔] Konfiguracja przeładowana!" # Wyświetlane, gdy konfiguracja pluginu została pomyślnie przeładowana
 
   # Kategoria dla komendy /hv help
   help:
-    - "&e============== &6Pomoc Haven &e==============="
-    - "/hv setspawn - &eustaw punkt spawnu;"
-    - "/hv delspawn - &eusun punkt spawnu;"
-    - "/hv reload - &eprzeładuj konfigurację pluginu;"
-    - "/hv help - &epokaż tę pomoc;"
-    - "/spawn - &eteleportuj się na spawn."
-    - "&e========================================="
+    - "<gradient:#D70000:#FF5D2D>============== POMOC ʜᴀᴠᴇɴ ============== </gradient>" # Tytuł menu pomocy
+    - "/ʜᴠ sᴇᴛsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>ustaw punkt spawnu</gradient><white>;</white>" # Ustawia spawn
+    - "/ʜᴠ ᴅᴇʟsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>usuń punkt spawnu</gradient><white>;</white>" # Usuwa spawn
+    - "/ʜᴠ ʀᴇʟᴏᴀᴅ - <gradient:#D70000:#FF5D2D>przeładuj konfigurację pluginu</gradient><white>;</white>" # Przeładowuje konfigurację
+    - "/ʜᴠ ʜᴇʟᴘ - <gradient:#D70000:#FF5D2D>pokaż tę pomoc</gradient><white>;</white>" # Wyświetla tę pomoc
+    - "/sᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>przeteleportuj do spawnu</gradient><white>.</white>" # Teleportuje do spawnu
+    - "<gradient:#D70000:#FF5D2D>=========================================</gradient>" # Stopka menu pomocy

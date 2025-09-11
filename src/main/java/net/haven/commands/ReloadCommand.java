@@ -1,6 +1,9 @@
 package net.haven.commands;
 
 import net.haven.Haven;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,20 +15,21 @@ public class ReloadCommand implements CommandExecutor {
     private final Haven plugin;
     private static final String PERMISSION = "haven.command.reload";
     private static final String RELOAD_SUCCESS_KEY = "messages.reload.success";
-    private static final String DEFAULT_SUCCESS_MSG = "&aConfiguration reloaded successfully!";
+    private static final String DEFAULT_SUCCESS_MSG = "<color:#38F200>[✔] Configuration reloaded!";
+    private final BukkitAudiences audiences;
+    private final MiniMessage mm = MiniMessage.miniMessage();
 
-    public ReloadCommand(Haven plugin) {
+    public ReloadCommand(Haven plugin, BukkitAudiences audiences) {
         this.plugin = plugin;
+        this.audiences = audiences;
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd,
-                             @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         return reload(sender);
     }
 
     public boolean reload(CommandSender sender) {
-        // Check permission
         if (!hasReloadPermission(sender)) {
             sendNoPermissionMessage(sender);
             return true;
@@ -47,8 +51,9 @@ public class ReloadCommand implements CommandExecutor {
     }
 
     private void sendNoPermissionMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.no-permissions",
-                "&cYou don't have permission to execute this command!"));
+        String message = plugin.getMessage("messages.no-permissions", "<color:#38F200>[✘] You don't have permission to execute this command!");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private void performReload() throws Exception {
@@ -59,7 +64,9 @@ public class ReloadCommand implements CommandExecutor {
     }
 
     private void sendSuccessMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage(RELOAD_SUCCESS_KEY, DEFAULT_SUCCESS_MSG));
+        String message = plugin.getMessage(RELOAD_SUCCESS_KEY, DEFAULT_SUCCESS_MSG);
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private void handleReloadError(CommandSender sender, Exception e) {

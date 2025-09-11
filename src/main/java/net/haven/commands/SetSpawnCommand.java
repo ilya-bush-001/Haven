@@ -1,6 +1,9 @@
 package net.haven.commands;
 
 import net.haven.Haven;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,15 +16,17 @@ public class SetSpawnCommand implements CommandExecutor {
     private final Haven plugin;
     private static final String PERMISSION = "haven.command.setspawn";
     private static final String SUCCESS_KEY = "messages.setspawn.success";
-    private static final String DEFAULT_SUCCESS_MSG = "&aSpawn point successfully set!";
+    private static final String DEFAULT_SUCCESS_MSG = "<color:#38F200>[✔] Spawn point successfully set!";
+    private final BukkitAudiences audiences;
+    private final MiniMessage mm = MiniMessage.miniMessage();
 
-    public SetSpawnCommand(Haven plugin) {
+    public SetSpawnCommand(Haven plugin, BukkitAudiences audiences) {
         this.plugin = plugin;
+        this.audiences = audiences;
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd,
-                             @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
 
         if (!(sender instanceof Player player)) {
             sendPlayerOnlyMessage(sender);
@@ -37,7 +42,9 @@ public class SetSpawnCommand implements CommandExecutor {
     }
 
     private void sendPlayerOnlyMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.error", "&cYou must be a player to use this command!"));
+        String message = plugin.getMessage("messages.not-player", "<color:#38F200>[✘] You must be a player to use this command!");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private boolean hasSetSpawnPermission(Player player) {
@@ -45,7 +52,9 @@ public class SetSpawnCommand implements CommandExecutor {
     }
 
     private void sendNoPermissionMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
+        String message = plugin.getMessage("messages.no-permissions", "<color:#38F200>[✘] You don't have permission to execute this command!");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private boolean setSpawnLocation(Player player, CommandSender sender) {
@@ -76,12 +85,15 @@ public class SetSpawnCommand implements CommandExecutor {
     }
 
     private void sendSuccessMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage(SUCCESS_KEY, DEFAULT_SUCCESS_MSG));
+        String message = plugin.getMessage(SUCCESS_KEY, DEFAULT_SUCCESS_MSG);
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private void handleSpawnSetError(CommandSender sender, Exception e) {
-        sender.sendMessage(plugin.getMessage("messages.error",
-                "&cFailed to set spawn point! Check console for details."));
+        String message = plugin.getMessage("messages.setspawn.error", "<color:#38F200>[✘] Failed to set spawn point! Check console for details.");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
 
         plugin.getLogger().severe("Failed to set spawn point: " + e.getMessage());
         e.printStackTrace();

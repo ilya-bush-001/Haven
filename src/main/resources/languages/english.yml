@@ -1,38 +1,38 @@
 messages:
 
   # Most usage messages
-  no-permissions: "&c[✘] You don't have permission to execute this command!" # If you don't have enough permissions
-  unknown-command: "&c[✘] Unknown command! Use &6/hv help" # If the command is unknown
-  usage: "&c[✘] Usage: /hv <setspawn|delspawn|reload|control>" # Usage plugin commands
-  error: "&c[✘] You must be a player to use this command!" # If you are writing certain commands from the console, you will not be allowed to do so.
+  no-permissions: "<color:#F2000E>[✘] You don't have permission to execute this command!" # If you don't have enough permissions
+  unknown-command: "<color:#F2000E>[✘] Unknown command! Use </color><gradient:#F27200:#F29900>/hv help</gradient>" # If the command is unknown
+  usage: "<color:#F2000E>[✘] Usage: /hv <setspawn|delspawn|reload|control>" # Usage plugin commands
+  not-player: "<color:#F2000E>[✘] You must be a player to use this command!" # If you are writing certain commands from the console, you will not be allowed to do so.
+  error: "<color:#F2000E>An error has occurred, please check the logs and contact the developers for assistance."
 
   # Category for command /hv setspawn
   setspawn:
-    success: "&a[✔] Spawn point successfully set!" # If spawn successfully set
+    success: "<color:#38F200>[✔] Spawn point successfully set!" # If spawn successfully set
+    error: "<color:#F2000E>Failed to set spawn point! Check console for details."
 
   # Category for command /hv spawn
   spawn:
-    success: "&aTeleported to spawn!" # If teleported to spawn
-    not-set: "&c[✘] Spawn not set!" # If spawnpoint not set
+    success: "<color:#38F200>Teleported to spawn!" # If teleported to spawn
+    not-set: "<color:#F2000E>[✘] Spawn not set!" # If spawnpoint not set
+    error: "<color:#F2000E>An error has occurred, please check the logs and contact the developers for assistance."
 
   # Category for command /hv delspawn
   delspawn:
-    success: "&a[✔] Spawn &cdeleted&a!" # If spawnpoint deleted
-    not-set: "&c[✘] Spawn was not set!" # If spawnpoint not set
+    success: "<color:#38F200>[✔] Spawn</color> <color:#F2000E>deleted</color><color:#38F200>!</color>" # If spawnpoint deleted
+    not-set: "<color:#F2000E>[✘] Spawn was not set!" # If spawnpoint not set
 
   # Category for command /hv reload
   reload:
-    success: "&a[✔] Configuration reloaded!" # If plugin reloaded
-
-  # Category for command /hv control
-  opened: "&a[✔] You opened control panel!" # If menu successfully opened
+    success: "<color:#38F200>[✔] Configuration reloaded!" # If plugin reloaded
 
   # Category for command /hv help
   help:
-    - "&e============== &6Haven Help &e==============="
-    - "/hv setspawn - &eset spawnpoint;"
-    - "/hv delspawn - &edelete spawnpoint;"
-    - "/hv reload - &ereload plugin configuration;"
-    - "/hv help - &eshow this help;"
-    - "/spawn - &eteleport to spawn."
-    - "&e========================================="
+    - "<gradient:#D70000:#FF5D2D>============== ʜᴀᴠᴇɴ ʜᴇʟᴘ ============== </gradient>"
+    - "/ʜᴠ sᴇᴛsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>sᴇᴛ sᴘᴀᴡɴᴘᴏɪɴᴛ</gradient><white>;</white>"
+    - "/ʜᴠ ᴅᴇʟsᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>ᴅᴇʟᴇᴛᴇ sᴘᴀᴡɴᴘᴏɪɴᴛ</gradient><white>;</white>"
+    - "/ʜᴠ ʀᴇʟᴏᴀᴅ - <gradient:#D70000:#FF5D2D>ʀᴇʟᴏᴀᴅ ᴘʟᴜɢɪɴ ᴄᴏɴғɪɢᴜʀᴀᴛɪᴏɴ</gradient><white>;</white>"
+    - "/ʜᴠ ʜᴇʟᴘ - <gradient:#D70000:#FF5D2D>sʜᴏᴡ ᴛʜɪs ʜᴇʟᴘ</gradient><white>;</white>"
+    - "/sᴘᴀᴡɴ - <gradient:#D70000:#FF5D2D>ᴛᴇʟᴇᴘᴏʀᴛ ᴛᴏ sᴘᴀᴡɴ</gradient><white>.</white>"
+    - "<gradient:#D70000:#FF5D2D>=========================================</gradient>"

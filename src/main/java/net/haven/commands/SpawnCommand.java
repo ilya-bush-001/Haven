@@ -1,6 +1,9 @@
 package net.haven.commands;
 
 import net.haven.Haven;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -14,12 +17,15 @@ public class SpawnCommand implements CommandExecutor {
     private final Haven plugin;
     private static final String PERMISSION = "haven.command.spawn";
     private static final String SUCCESS_KEY = "messages.spawn.success";
-    private static final String DEFAULT_SUCCESS_MSG = "&aTeleported to spawn!";
+    private static final String DEFAULT_SUCCESS_MSG = "<color:#38F200>[✔] Spawn point successfully set!";
+    private static final String DEFAULT_NOT_SET_MSG = "<color:#F2000E>[✘] Spawn point not set!";
     private static final String NOT_SET_KEY = "messages.spawn.not-set";
-    private static final String DEFAULT_NOT_SET_MSG = "&cSpawn point not set!";
+    private final BukkitAudiences audiences;
+    private final MiniMessage mm = MiniMessage.miniMessage();
 
-    public SpawnCommand(Haven plugin) {
+    public SpawnCommand(Haven plugin, BukkitAudiences audiences) {
         this.plugin = plugin;
+        this.audiences = audiences;
     }
 
     public Haven getPlugin() {
@@ -43,7 +49,9 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendPlayerOnlyMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.error", "&cYou must be a player to use this command!"));
+        String message = plugin.getMessage("messages.not-player", "<color:#38F200>[✘] You must be a player to use this command!");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private boolean hasSpawnPermission(Player player) {
@@ -51,7 +59,9 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendNoPermissionMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.no-permissions", "&cYou don't have permission to execute this command!"));
+        String message = plugin.getMessage("messages.no-permissions", "<color:#38F200>[✘] You don't have permission to execute this command!");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private boolean teleportToSpawn(Player player, CommandSender sender) {
@@ -74,7 +84,9 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendSpawnNotSetMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage(NOT_SET_KEY, DEFAULT_NOT_SET_MSG));
+        String message = plugin.getMessage(NOT_SET_KEY, DEFAULT_NOT_SET_MSG);
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private Location getSpawnLocation() {
@@ -94,7 +106,11 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendInvalidSpawnMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage("messages.error", "&cConfigured spawn point is invalid! Please set a new spawn."));
+        String message = plugin.getMessage("messages.not-player", "<color:#38F200>[✘] You must be a player to use this command!");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
+
+        sender.sendMessage(plugin.getMessage("messages.spawn.error", "Configured spawn point is invalid! Please set a new spawn."));
     }
 
     private boolean performTeleport(Player player, CommandSender sender, Location spawnLocation) {
@@ -110,11 +126,15 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     private void sendSuccessMessage(CommandSender sender) {
-        sender.sendMessage(plugin.getMessage(SUCCESS_KEY, DEFAULT_SUCCESS_MSG));
+        String message = plugin.getMessage(SUCCESS_KEY, DEFAULT_SUCCESS_MSG);
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
     }
 
     private void handleTeleportError(CommandSender sender, Exception e) {
-        sender.sendMessage(plugin.getMessage("messages.error", "&cFailed to teleport to spawn! Check console for details."));
+        String message = plugin.getMessage("messages.error", "<color:#38F200>[✘] Failed to teleport to spawn! Check console for details.");
+        Component parsed = mm.deserialize(message);
+        audiences.sender(sender).sendMessage(parsed);
 
         plugin.getLogger().severe("Teleport failed: " + e.getMessage());
         e.printStackTrace();
