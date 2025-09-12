@@ -7,7 +7,7 @@ import net.haven.completers.HavenTabCompleter;
 import net.haven.gui.ControlGUIHolder;
 import net.haven.listeners.MenuListener;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import net.kyori.adventure.text.ComponentLike;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import org.jetbrains.annotations.NotNull;
 
 public final class Haven extends JavaPlugin {
+
+    private final MiniMessage mm;
 
     private BukkitAudiences audiences;
 
@@ -33,6 +35,10 @@ public final class Haven extends JavaPlugin {
     private CommandHandler commandHandler;
     private MenuListener menuListener;
     private BukkitTask statsUpdateTask;
+
+    public Haven(MiniMessage mm) {
+        this.mm = mm;
+    }
 
     @Override
     public void onEnable() {
@@ -71,7 +77,7 @@ public final class Haven extends JavaPlugin {
         localization.loadLanguages();
 
         SpawnCommand spawnCommand = new SpawnCommand(this, audiences);
-        this.menuListener = new MenuListener(spawnCommand);
+        this.menuListener = new MenuListener(spawnCommand, audiences, mm);
         this.commandHandler = new CommandHandler(this, menuListener, audiences);
     }
 
@@ -178,5 +184,9 @@ public final class Haven extends JavaPlugin {
             getLogger().log(Level.SEVERE, "Failed to reload plugin configuration: ", e);
             return false;
         }
+    }
+
+    public BukkitAudiences getAudiences() {
+        return audiences;
     }
 }

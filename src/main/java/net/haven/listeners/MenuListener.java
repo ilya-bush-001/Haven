@@ -2,6 +2,9 @@ package net.haven.listeners;
 
 import net.haven.commands.SpawnCommand;
 import net.haven.gui.ControlGUIHolder;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -27,9 +30,13 @@ public class MenuListener implements Listener {
     private static final double GOOD_TPS = 15.0;
 
     private final SpawnCommand spawnCommand;
+    private final BukkitAudiences audiences;
+    private final MiniMessage mm;
 
-    public MenuListener(SpawnCommand spawnCommand) {
+    public MenuListener(SpawnCommand spawnCommand, BukkitAudiences audiences, MiniMessage mm) {
         this.spawnCommand = spawnCommand;
+        this.audiences = spawnCommand.getPlugin().getAudiences();
+        this.mm = mm;
     }
 
     @EventHandler
@@ -111,17 +118,24 @@ public class MenuListener implements Listener {
     }
 
     private void sendSpawnNotSetMessage(Player player) {
-        player.sendMessage(spawnCommand.getPlugin().getMessage("messages.spawn.not-set",
-                "&cSpawn point is not set!"));
+        String rawMessage = spawnCommand.getPlugin().getMessage("messages.spawn.not-set", "<color:#F2000E>[✘] Spawn point not set!");
+        Component parsed = mm.deserialize(rawMessage);
+        audiences.sender(player).sendMessage(parsed);
     }
 
     private void performSafeTeleport(Player player, Location spawnLocation) {
         try {
             player.teleport(spawnLocation);
-            player.sendMessage(spawnCommand.getPlugin().getMessage("messages.spawn.success",
-                    "&aTeleported to spawn!"));
+            String rawMessage = spawnCommand.getPlugin().getMessage("messages.spawn.success",
+                    "<color:#38F200>Teleported to spawn!");
+            Component parsed = mm.deserialize(rawMessage);
+            audiences.sender(player).sendMessage(parsed);
         } catch (Exception e) {
-            player.sendMessage(ChatColor.RED + "Failed to teleport to spawn!");
+            String rawMessage = spawnCommand.getPlugin().getMessage("messages.error",
+                    "<color:#F2000E>Failed to teleport to spawn!");
+            Component parsed = mm.deserialize(rawMessage);
+            audiences.sender(player).sendMessage(parsed);
+
             spawnCommand.getPlugin().getLogger().warning("Teleport failed for " + player.getName() + ": " + e.getMessage());
         }
     }
